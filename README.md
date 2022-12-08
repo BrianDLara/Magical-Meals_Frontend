@@ -21,7 +21,7 @@
 
 ## Links to project planning
 
-[Trello](https://trello.com/b/dXbChSVA/valormore)
+[Trello](https://trello.com/b/Aym0IEb4/magical-meals)
 
 #### ERD
 
