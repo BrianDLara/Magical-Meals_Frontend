@@ -40,7 +40,7 @@ const Register = () => {
         <section className="section-container top-section">
             <div className="field-container">
             <div className="field-text">
-                <label htmlFor="firstName">Name:</label>
+                <label htmlFor="name">Name:</label>
             </div>
             <input
                 onChange={handleChange}
@@ -48,7 +48,7 @@ const Register = () => {
                 type="text"
                 placeholder="Full Name"
                 value={formValues.name}
-                className="text-input"
+                className="text-input text-black"
                 required
             />
             </div>
@@ -64,7 +64,7 @@ const Register = () => {
                 type="text"
                 placeholder="username"
                 value={formValues.username}
-                className="text-input"
+                className="text-input text-black"
                 required
             />
             </div>
@@ -80,7 +80,7 @@ const Register = () => {
                 type="password"
                 placeholder="Password"
                 value={formValues.password}
-                className="text-input"
+                className="text-input text-black"
                 required
             />
             </div>
@@ -94,7 +94,7 @@ const Register = () => {
                 name="confirmPassword"
                 placeholder="Confirm Password"
                 value={formValues.confirmPassword}
-                className="text-input"
+                className="text-input text-black"
                 required
             />
             </div>

@@ -30,7 +30,7 @@ const Login = ({ toggleAuthenticated, setUser }) => {
               type="username"
               placeholder="Username"
               value={formValues.username}
-              className="input"
+              className="input text-black"
               required
             />
           </div>
@@ -42,7 +42,7 @@ const Login = ({ toggleAuthenticated, setUser }) => {
               name="password"
               placeholder="*********"
               value={formValues.password}
-              className="input"
+              className="input text-black"
               required
             />
           </div>

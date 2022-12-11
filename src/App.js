@@ -1,24 +1,68 @@
 import './index.css'
 import { Routes, Route } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+
+// Authentication imports
+
+import { CheckSession } from './services/Auth'
 
 import Nav from './components/Nav'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import Home from './pages/Home'
 import Recipe from './pages/Recipe'
+import Favorite from './pages/Favorite'
 
 function App() {
+  const [authenticated, toggleAuthenticated] = useState(false)
+  const [user, setUser] = useState(null)
+
+  const handleLogOut = () => {
+    //Reset all auth related state and clear localStorage
+    setUser(null)
+    toggleAuthenticated(false)
+    localStorage.clear()
+  }
+
+  const checkToken = async () => {
+    const user = await CheckSession()
+    setUser(user)
+    toggleAuthenticated(true)
+  }
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      checkToken()
+    }
+  }, [])
   return (
     <div className="App">
       <header>
-        <Nav />
+        <Nav
+          authenticated={authenticated}
+          user={user}
+          handleLogOut={handleLogOut}
+        />
       </header>
       <main>
         <Routes>
           <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Home />} />
+          <Route
+            path="/login"
+            element={
+              <Login
+                setUser={setUser}
+                toggleAuthenticated={toggleAuthenticated}
+              />
+            }
+          />
+          <Route
+            path="/"
+            element={<Home user={user} authenticated={authenticated} />}
+          />
           <Route path="recipe/:recipeId" element={<Recipe />} />
+          <Route path="favorite/:userId" element={<Favorite />} />
         </Routes>
       </main>
     </div>
