@@ -131,7 +131,7 @@ html {
 #inline{
   display: flex;
   justify-content: center;
-  width:100%;
+  width:90%;
 }
 
 .inline-snap{
@@ -170,6 +170,68 @@ html {
   width:20rem;
   height: 16rem;
 }
+
+/* recipe page */
+
+.banner-image{
+  width: 200vh;
+  height: 40rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  object-fit: contain;
+}
+
+.times-background{
+  background-color: #d1495b;
+}
+
+.recipe-background{
+  background-color: #e5deb6;
+}
+
+.ingredients-background{
+  background-color: rgb(255, 255, 255);
+  border: 6px dashed rgb(255, 162, 0);
+}
+
+.item-container{
+  
+  padding:15px 5px;
+  border-bottom: 2.7px solid rgb(124, 123, 123);
+}
+
+
+.ingredient-size{
+  width: 40px;
+  height: 40px;
+  background-position: center;
+  background-repeat: no-repeat;
+  object-fit: contain;
+}
+
+main{
+  background-color: rgb(15 23 42);
+}
+
+.dotted-circle{
+ position:relative;
+ top:-17px;
+ left:14px;
+  width: 20rem;
+  height: 20rem;
+  border: 4px dashed rgb(255, 162, 0);
+  border-radius: 50%;
+}
+
+.solid-circle{
+  display:inline-block;
+  width: 23rem;
+  height: 23rem;
+  border: 10px solid rgb(255, 162, 0);
+  border-radius: 50%;
+}
+
 
 @media (max-width: 767px){
   /* nav */
