@@ -62,22 +62,24 @@ const Recipe = () => {
   }
 
   return(
-    <div className='min-h-screen container px-auto text-white' key={recipe.id}>
+    <div className='min-h-screen container mx-auto text-white' key={recipe.id}>
 
-      <section className='text-center px-20 py-10'> 
+      <section className='text-center px-4 xl:px-20 pt-8 xl:py-10'> 
         <h1 className='text-6xl font-1-bold pt-6'>{recipe?.name}</h1>
-        <p className='text-2xl font-2 pt-10 pb-6'>{recipe?.description}</p>
+        <p className='text-2xl font-2 pt-10 xl:pb-6'>{recipe?.description}</p>
       </section>
       <section className='flex flex-col'>
-        <img src={recipe.image} alt={recipe.name} className="banner-image pt-20"/>
-        <div className='flex justify-center items-start relative pt-4'>
+        <div className='banner-image-container'> 
+          <img src={recipe.image} alt={recipe.name} className="banner-image px-2 xl:pt-20"/>
+        </div>
+        <div className='flex justify-center items-start relative px-6 sm:pt-4 mb-6 xl:mt-40 xl:mb-28'>
           <p className='font-2-bold text-xl'>Share:&nbsp;&nbsp;</p>
           <a  href={`https://twitter.com/share?url=http://localhost:3000/recipe/${recipe.id}&text=${recipe.name}`} className='twitter-icon mx-2 text-2xl'><FontAwesomeIcon icon={faTwitter}/></a>
           <a href={`https://www.facebook.com/sharer.php?u=http://localhost:3000/recipe/${recipe.id}`} className='facebook-icon mx-2 text-2xl'><FontAwesomeIcon icon={faFacebook}/></a>
           <button onClick={toggleFavorite} className='font-2-bold favorite-icon text-xl text-black ml-8' id='addedFav'>Add To Favorites</button>
         </div>
       </section>
-      <div className='flex place-content-around'>
+      <div className='flex flex-col xl:flex-row items-center xl:items-start xl:place-content-around'>
         <section className='relative top-14 py-8 solid-circle shadow-2xl'>
           <div className="dotted-circle times-background">
             <div className='text-2xl flex flex-col place-items-center relative top-24'> 
@@ -87,7 +89,7 @@ const Recipe = () => {
             </div>
           </div>
         </section>
-        <section className='text-black ingredients-background rounded mt-4 p-4'>
+        <section className='mt-24 xl:mt-4 mx-10 xl:mx-0 text-black ingredients-background rounded p-4'>
           <h2 className='font-2-bold text-2xl'>Ingredients</h2>
           <div className='text-lg'>
             {recipe.recipe_items?.map((item) => (

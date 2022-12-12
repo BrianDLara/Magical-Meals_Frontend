@@ -192,11 +192,15 @@ html {
 }
 
 /* recipe page */
+.banner-image-container{
+  height: 30rem;
+  height: 30rem;
+}
 
 .banner-image{
   width: 200vh;
   height: 40rem;
-  overflow-y: hidden;
+  overflow-y:hidden;
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -290,8 +294,22 @@ main{
 
 .favorite-image{
   width: 30rem;
-  height: 20rem;
+  height: 18rem;
   object-fit:cover;
+}
+
+@media (max-width: 1279px){
+
+  .banner-image-container{
+    margin: 5rem 0;
+    height: 30rem;
+    height: 25rem;
+  }
+  
+  .banner-image{
+    width: 200vh;
+    height: 30rem;
+  }
 }
 
 @media (max-width: 1089px){
@@ -511,4 +529,38 @@ main{
   height: 17rem;
   object-fit:cover;
 }
+
+/* .dotted-circle{
+  position:relative;
+  top:-17px;
+  left:14px;
+   width: 20rem;
+   height: 20rem;
+   border: 4px dashed rgb(255, 162, 0);
+   border-radius: 50%;
+ } */
+
+ .banner-image-container{
+  height: 30rem;
+  height: 29rem;
+}
+
+.banner-image{
+  width: 200vh;
+  height: 30rem;
+}
+}
+
+@media (max-width: 420px){
+  .banner-image-container{
+    height: 30rem;
+    height: 13rem;
+  }
+  
+  .banner-image{
+    width: 200vh;
+    height: 18rem;
+  }
+
+
 }
