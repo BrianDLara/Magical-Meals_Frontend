@@ -40,13 +40,13 @@ const Register = () => {
   }
 
     return (
-    <div className="register-container min-h-screen text-white container">
-        <form className="form-items" onSubmit={handleSubmit}>
+    <div className="register-container w-full max-w-xs min-h-screen text-white container">
+        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
         {/* new user Full name */}
         <section className="section-container top-section">
             <div className="field-container">
             <div className="field-text">
-                <label htmlFor="name">Name:</label>
+                <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor="name">Name:</label>
             </div>
             <input
                 onChange={handleChange}
@@ -62,7 +62,7 @@ const Register = () => {
         <section className="section-container">
             <div className="field-container">
             <div className="field-text">
-                <label htmlFor="username">Username</label>
+                <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor="username">Username</label>
             </div>
             <input
                 onChange={handleChange}
@@ -78,7 +78,7 @@ const Register = () => {
         <section className="section-container">
             <div className="field-container">
             <div className="field-text">
-                <label htmlFor="password">Password</label>
+                <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor="password">Password</label>
             </div>
             <input
                 onChange={handleChange}
@@ -92,7 +92,7 @@ const Register = () => {
             </div>
             <div className="field-container">
             <div className="field-text">
-                <label htmlFor="confirmPassword">Confirm Password</label>
+                <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor="confirmPassword">Confirm Password</label>
             </div>
             <input
                 onChange={handleChange}
