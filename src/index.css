@@ -493,4 +493,22 @@ main{
   height: 3.3rem;
 
 }
+
+/* Favorite page */
+.favorite-data-container{
+  margin-top: 3rem;
+  width: 20rem;
+  height: 20rem;
+ 
+  overflow-y: hidden;
+
+
+  
+}
+
+.favorite-image{
+  width: 30rem;
+  height: 17rem;
+  object-fit:cover;
+}
 }
