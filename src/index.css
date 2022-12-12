@@ -279,6 +279,12 @@ main{
   background-color: #00798c;
 }
 
+.direction-container{
+  padding-bottom: 1.5rem;
+  border-bottom: 2.7px solid rgb(245 158 11);
+}
+
+
 /* Favorite page */
 .favorite-data-container{
   margin: 0 auto;

@@ -102,11 +102,11 @@ const Recipe = () => {
           </div>
         </section>
       </div>
-      <section className='py-10'>
-        <h2>Directions</h2>
-        <div>
+      <section className=' py-10 px-6 text-2xl mb-2'>
+        <h2 className='font-2-bold mb-4 text-amber-500'>Directions:</h2>
+        <div className='font-1 text-2xl'>
           {recipe.directions?.map((direction) =>(
-            <p key={direction.id}>{direction}</p>
+            <p className='direction-container mb-8' key={direction.id}>{direction}</p>
           ))}
         </div>
       </section>
