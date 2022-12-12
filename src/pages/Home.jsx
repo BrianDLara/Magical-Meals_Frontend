@@ -45,8 +45,8 @@ const Home = ({user, authenticated}) => {
     }
 
     return user && authenticated ? ( 
-        <div className='bg-slate-900 text-white pt-2'>
-            <div className='grid min-h-screen place-items-center'> 
+        <div className='home-container bg-slate-900 text-white pt-2'>
+            <div className='grid place-items-center'> 
                 <section className=' w-4/5 md:w-3/5'> 
                     <h1 className='text-4xl font-1-bold pb-6 pt-20'>What's Trending</h1>
                     <div className='trending-container'>
@@ -79,9 +79,9 @@ const Home = ({user, authenticated}) => {
             </div>
         </div>
     ) : (
-        <div className="protected text-white">
+        <div className="flex flex-col justify-center items-center protected font-1-bold text pl-8 p-4  text-xl md:text-3xl text-white">
           <h3>Oops! You must be logged in to gain access to all this amazing recipes!</h3>
-          <button className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-200 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" onClick={() => navigate('/login')}>Login</button>
+          <button className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-200 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 mt-10 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" onClick={() => navigate('/login')}>Login</button>
         </div>
       )
 }
