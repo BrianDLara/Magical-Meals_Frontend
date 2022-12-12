@@ -320,8 +320,8 @@ main{
 
 .cart-image{
   width: 20rem;
-  height: 18rem;
-  object-fit:cover;
+  height: 15rem;
+  object-fit:contain;
 }
 
 @media (max-width: 1279px){
