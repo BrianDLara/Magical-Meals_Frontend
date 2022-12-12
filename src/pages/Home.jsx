@@ -57,8 +57,8 @@ const Home = ({user, authenticated}) => {
                     </div>
                 </section>
                 <section> 
-                    <h1 className='text-4xl pl-6 md:pl-24 font-1-bold pb-6 pt-20'>Popular Recipes This Week</h1>
-                    <div id="inline">
+                    <h1 className='text-4xl pl-8 md:pl-24 font-1-bold pb-6 pt-20'>Popular Recipes This Week</h1>
+                    <div className="inline">
                         <span id="scrLeft" onClick={scrLeft}></span>
                         <div className="popular-container inline-snap scroll-images">
                             {popular.map((recipe) => (

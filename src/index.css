@@ -69,6 +69,7 @@ html {
   align-items: center;
   justify-content: center;
   margin: 0 auto;
+  overflow-x: hidden;
 }
 
 .protected {
@@ -82,7 +83,7 @@ html {
 
 /* Trending Section */
 .trending-container{
-
+margin: 0 auto;
 }
 
 .trending-img{
@@ -122,15 +123,13 @@ html {
   background-repeat: no-repeat;
   
   position: relative;
-  top: 130px;
-  width: 3rem;
-  height: 3rem;
+  top: 220px;
+  width: 4rem;
+  height: 4rem;
 
   cursor: pointer;
 
-  filter: saturate(500%) contrast(800%) brightness(500%) 
-  invert(60%) sepia(80%) hue-rotate(180deg); 
-}
+  filter: invert(34%) sepia(14%) saturate(2304%) hue-rotate(166deg) brightness(94%) contrast(84%);}
 
 #scrLeft:hover, #scrRight:hover{
   filter: saturate(500%) contrast(800%) brightness(500%) 
@@ -142,12 +141,6 @@ html {
   transform: scaleX(-1);
 }
 
-#inline{
-  display: flex;
-  justify-content: center;
-  width:90%;
-}
-
 .inline-snap{
   scroll-snap-type:inline mandatory;
   scroll-padding-inline: 1rem;
@@ -157,32 +150,44 @@ html {
   scroll-snap-align: start;
 }
 
+.inline{
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  width:90%;
+}
 
 .popular-container{
   display: grid;
   grid-auto-flow: column;
-  
   overflow-x: auto;
+  overflow-y: hidden;
   overscroll-behavior-inline: contain;
   
   align-items: center;
-  height: 20rem;
-  width: 80%;
-  margin: 0 2rem 10rem 2rem;
-  padding: 0 1rem;
-  gap: 5%;
+  height: 25rem;
+  width: 70%;
+  margin: 3rem 1rem 6rem 1rem;
+  gap:5%;
 }
 
 .popular-recipe{
-  max-width: 20rem;
-  max-height: 20rem;
+  min-width: 20rem;
+  min-height: 18rem;
   border-radius: 10px;
+  overflow-x: hidden;
+  overflow-y: hidden;
   cursor: pointer; 
+  background-position: center;
+  object-position: center;
 }
 
 #popular-image{
   width:20rem;
-  height: 16rem;
+  height: 20rem;
+  object-fit:cover;
+  object-position: center;
+  background-position: center;
 }
 
 /* recipe page */
@@ -411,4 +416,58 @@ main{
     -webkit-transition: .25s 0s ease-in-out;
     transition: .25s 0s ease-in-out;
   }
+}
+
+@media (max-width: 640px){
+
+
+.inline{
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  width:65%;
+}
+
+  .popular-container{
+  display: grid;
+  grid-auto-flow: column;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-inline: contain;
+  
+  align-items: center;
+  height: 11rem;
+  width: 16rem;
+  margin: 3rem 1rem 6rem 1rem;
+  padding-bottom: 2rem;
+  
+  gap:10%;
+}
+
+.popular-recipe{
+  min-width: 10rem;
+  max-height: 10rem;
+  border-radius: 10px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  cursor: pointer; 
+  background-position: center;
+  object-position: center;
+}
+
+#popular-image{
+  width:17rem;
+  height: 11rem;
+  object-fit:cover;
+  object-position: center;
+  background-position: center;
+}
+
+#scrLeft, #scrRight{
+ 
+  top: 110px;
+  width: 3rem;
+  height: 3rem;
+
+}
 }
