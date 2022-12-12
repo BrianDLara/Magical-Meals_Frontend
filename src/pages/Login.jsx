@@ -19,33 +19,33 @@ const Login = ({ toggleAuthenticated, setUser }) => {
     navigate('/')
   }
   return (
-    <div className="login-container min-h-screen text-white">
-        <form onSubmit={handleSubmit} className="w-full max-w-sm">
+    <div className="text-lg w-full max-w-xs min-h-screen text-white container pt-24">
+        <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
           
           {/* Username Section */}
-          <section className="input-wrapper">
-            <label htmlFor="username">Username</label>
+          <section className="mb-4">
+            <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor="username">Username</label>
             <input
               onChange={handleChange}
               name="username"
               type="username"
               placeholder="Username"
               value={formValues.username}
-              className="input text-black"
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               required
             />
           </section>
 
           {/* Password Section */}
-          <section className="input-wrapper">
-            <label htmlFor="password">Password</label>
+          <section className="mb-6">
+            <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor="password">Password</label>
             <input
               onChange={handleChange}
               type="password"
               name="password"
               placeholder="*********"
               value={formValues.password}
-              className="input text-black"
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               required
             />
           </section>
@@ -53,16 +53,16 @@ const Login = ({ toggleAuthenticated, setUser }) => {
           {/* Login Button */}
           <button
             disabled={!formValues.username || !formValues.password}
-            className="form-button"
+            className="register-button hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
             Login
           </button>
 
           {/* Register message & Link */}
-          <span id="register-container">
+          <span className='block text-gray-700 text-sm font-bold mb-2 mt-12 text-center'>
             <h3>Haven't made an account yet? &nbsp;</h3>
             <Link to="/register">
-              <h3>Register Here</h3>
+              <h3 className='text-green-700'>Register Here</h3>
             </Link>
           </span>
           
