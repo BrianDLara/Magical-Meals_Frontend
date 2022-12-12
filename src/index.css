@@ -83,7 +83,7 @@ html {
 
 /* Trending Section */
 .trending-container{
-margin: 0 auto;
+
 }
 
 .trending-img{
@@ -155,6 +155,7 @@ margin: 0 auto;
   justify-content: center;
   margin: 0 auto;
   width:90%;
+  height: auto;
 }
 
 .popular-container{
@@ -293,6 +294,44 @@ main{
   object-fit:cover;
 }
 
+@media (max-width: 1089px){
+.inline{
+  width:70%; 
+}
+}
+
+@media (max-width: 910px){
+  .inline{
+    width:90%;
+  }
+
+  .popular-container{
+    height: 15.2rem;
+    width: 35rem;
+    margin: 3rem 1rem 6rem 1rem;
+    gap:10%;
+  }
+
+  .popular-recipe{
+    min-width: 15rem;
+    max-height: 10rem;
+    border-radius: 10px;
+  }
+  
+  #popular-image{
+    width:17rem;
+    height: 14rem;
+  }
+  
+  #scrLeft, #scrRight{
+   
+    top: 140px;
+    width: 4rem;
+    height: 4rem;
+  
+  }
+  }
+
 @media (max-width: 767px){
   /* nav */
   
@@ -422,42 +461,26 @@ main{
 
 
 .inline{
-  display: flex;
-  justify-content: center;
-  margin: 0 auto;
-  width:65%;
+  width:80%;
 }
 
   .popular-container{
-  display: grid;
-  grid-auto-flow: column;
-  overflow-x: auto;
-  overflow-y: hidden;
-  overscroll-behavior-inline: contain;
-  
-  align-items: center;
-  height: 11rem;
-  width: 16rem;
+  height: 15.2rem;
+  width: 19rem;
   margin: 3rem 1rem 6rem 1rem;
-  padding-bottom: 2rem;
   
   gap:10%;
 }
 
 .popular-recipe{
-  min-width: 10rem;
-  max-height: 10rem;
+  min-width: 13rem;
+  max-height: 15rem;
   border-radius: 10px;
-  overflow-x: hidden;
-  overflow-y: hidden;
-  cursor: pointer; 
-  background-position: center;
-  object-position: center;
 }
 
 #popular-image{
   width:17rem;
-  height: 11rem;
+  height: 14rem;
   object-fit:cover;
   object-position: center;
   background-position: center;
@@ -465,9 +488,9 @@ main{
 
 #scrLeft, #scrRight{
  
-  top: 110px;
-  width: 3rem;
-  height: 3rem;
+  top: 130px;
+  width: 3.3rem;
+  height: 3.3rem;
 
 }
 }

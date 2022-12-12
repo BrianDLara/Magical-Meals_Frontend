@@ -57,7 +57,7 @@ const Home = ({user, authenticated}) => {
                     </div>
                 </section>
                 <section> 
-                    <h1 className='text-4xl pl-8 md:pl-24 font-1-bold pb-6 pt-20'>Popular Recipes This Week</h1>
+                    <h1 className='text-2xl md:text-4xl text-center font-1-bold pt-20'>Popular Recipes This Week</h1>
                     <div className="inline">
                         <span id="scrLeft" onClick={scrLeft}></span>
                         <div className="popular-container inline-snap scroll-images">
