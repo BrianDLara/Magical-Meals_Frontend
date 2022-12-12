@@ -558,6 +558,10 @@ main{
 }
 
 @media (max-width: 420px){
+  label .menu {
+    top: -102px; 
+  }
+
   .banner-image-container{
     height: 30rem;
     height: 13rem;

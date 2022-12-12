@@ -79,7 +79,7 @@ const Recipe = () => {
           <button onClick={toggleFavorite} className='font-2-bold favorite-icon text-xl text-black ml-8' id='addedFav'>Add To Favorites</button>
         </div>
       </section>
-      <div className='flex flex-col xl:flex-row items-center xl:items-start xl:place-content-around'>
+      <div className='flex flex-col xl:flex-row items-center xl:items-start xl:place-content-around sm:mb-10 xl:mb-24'>
         <section className='relative top-14 py-8 solid-circle shadow-2xl'>
           <div className="dotted-circle times-background">
             <div className='text-2xl flex flex-col place-items-center relative top-24'> 
@@ -102,7 +102,7 @@ const Recipe = () => {
           </div>
         </section>
       </div>
-      <section className=' py-10 px-6 text-2xl mb-2'>
+      <section className=' py-10 px-6 xl:px-56 text-2xl mb-2'>
         <h2 className='font-2-bold mb-4 text-amber-500'>Directions:</h2>
         <div className='font-1 text-2xl'>
           {recipe.directions?.map((direction) =>(
