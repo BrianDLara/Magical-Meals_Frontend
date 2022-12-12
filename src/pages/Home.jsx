@@ -79,7 +79,7 @@ const Home = ({user, authenticated}) => {
             </div>
         </div>
     ) : (
-        <div className="flex flex-col justify-center items-center protected font-1-bold text pl-8 p-4  text-xl md:text-3xl text-white">
+        <div className="min-h-screen flex-1 flex-col justify-center items-center protected font-1-bold text pl-8 p-4  text-xl md:text-3xl text-white">
           <h3>Oops! You must be logged in to gain access to all this amazing recipes!</h3>
           <button className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-200 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 mt-10 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" onClick={() => navigate('/login')}>Login</button>
         </div>
