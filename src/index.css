@@ -65,6 +65,14 @@ html {
   margin: 0 auto;
 }
 
+.protected {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
 
 /* Trending Section */
 .trending-container{
@@ -176,6 +184,7 @@ html {
 .banner-image{
   width: 200vh;
   height: 40rem;
+  overflow-y: hidden;
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -232,6 +241,46 @@ main{
   border-radius: 50%;
 }
 
+.twitter-icon{
+  color: #1da1f2;
+}
+
+.facebook-icon{
+  color: #1877f2;
+}
+
+.favorite-icon{
+  color: #f0ad4e;
+}
+
+.favorite-icon:hover, .facebook-icon:hover, .twitter-icon:hover{
+  color: white;
+}
+
+
+
+.favorite-alert-bg{
+  background-color: #00798c;
+}
+
+/* Favorite page */
+.favorite-data-container{
+  margin: 0 auto;
+  margin-top: 5rem;
+  width: 30rem;
+  height: 20rem;
+ 
+  overflow-y: hidden;
+
+
+  
+}
+
+.favorite-image{
+  width: 30rem;
+  height: 20rem;
+  object-fit:cover;
+}
 
 @media (max-width: 767px){
   /* nav */
@@ -312,8 +361,8 @@ main{
   
   
   label input:checked + .menu + .nav-items-ul {
-    background: #212529;
-    box-shadow: 0 0 0 100vw #212529, 0 0 0 100vh #FFF;
+    background: #ffffff;
+    box-shadow: 0 0 0 100vw #ffffff, 0 0 0 100vh #FFF;
     border-radius: 0;
     color: white;
     z-index: 1;

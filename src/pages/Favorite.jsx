@@ -1,6 +1,6 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useState, useEffect, useCallback } from 'react'
+import { Link, useParams } from 'react-router-dom'
 import axios from 'axios'
 
 const Favorite = () => {
@@ -8,22 +8,50 @@ const Favorite = () => {
 
     const [favorite, setFavorite] = useState(null)
   
-    const getUserFavorites = async () => {
+    const getUserFavorites = useCallback(async () => {
       const res = await axios.get(
-        `http://localhost:3001/api/users/get_all_cart/id/${userId}`
+        `http://localhost:3001/api/favorites/users_favorites/id/${userId}`
       )
       setFavorite(res.data)
       console.log(res.data)
       
-    }
+    }, [userId])
+    
     useEffect(() => {
       getUserFavorites()
-    }, [])
+    }, [getUserFavorites])
+
+    const handleRefresh = () => {
+      window.location.reload(false);
+    }
+    
+    const handleDelete = async (e) => {
+      
+      let recipeId = e
+      // console.log(recipeId)
+      
+      await axios.delete(`http://localhost:3001/api/favorites/user_id/${userId}/recipe_id/${recipeId}`)
+      handleRefresh();
+    }
+
     return favorite !== null ? (
-        <div>
+        <div className='text-white min-h-screen'>
             <h2>
                 {favorite.name}
             </h2>
+            <div>
+              {favorite.user_favorites.map((recipe) => (
+                <div key={recipe.id } className="favorite-data-container">
+                  <div className='flex justify-between'> 
+                    <h3 className='font-2-bold'>{recipe.name}</h3>
+                    <button onClick={() => handleDelete(recipe.id)} className="mb-2 font-2 text-white bg-transparent hover:bg-red-700 hover:text-white rounded-lg p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">Delete</button>
+                  </div>
+                  <Link to={`/recipe/${recipe.id}`}> 
+                    <img src={recipe.image} alt={recipe.name} className="favorite-image"/>
+                  </Link>
+                </div>
+              ))}
+            </div>
         </div>
     ) : null
     

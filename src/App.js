@@ -12,6 +12,7 @@ import Login from './pages/Login'
 import Home from './pages/Home'
 import Recipe from './pages/Recipe'
 import Favorite from './pages/Favorite'
+import Cart from './pages/Cart'
 
 function App() {
   const [authenticated, toggleAuthenticated] = useState(false)
@@ -61,8 +62,12 @@ function App() {
             path="/"
             element={<Home user={user} authenticated={authenticated} />}
           />
-          <Route path="recipe/:recipeId" element={<Recipe />} />
+          <Route
+            path="/user_id/:userId/recipe/:recipeId"
+            element={<Recipe user={user} />}
+          />
           <Route path="favorite/:userId" element={<Favorite />} />
+          <Route path="cart/:userId" element={<Cart user={user} />} />
         </Routes>
       </main>
     </div>

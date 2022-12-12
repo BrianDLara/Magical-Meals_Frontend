@@ -2,9 +2,11 @@ import axios from 'axios'
 import React from 'react'
 import Popular from '../components/Popular'
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
-const Home = () => {
+const Home = ({user, authenticated}) => {
+    const navigate = useNavigate()
+
     const [trending, setTrending] = useState([])
     const [popular, setPopular] = useState([])
 
@@ -42,17 +44,15 @@ const Home = () => {
         right.scrollBy(350, 0)
     }
 
-    return ( 
+    return user && authenticated ? ( 
         <div className='bg-slate-900 text-white pt-2'>
             <div className='grid min-h-screen place-items-center'> 
                 <section className=' w-4/5 md:w-3/5'> 
                     <h1 className='text-4xl font-1-bold pb-6 pt-20'>What's Trending</h1>
                     <div className='trending-container'>
-                            <Link to={`/recipe/${trending.id}`}>
-                                <div key={trending.id} id={trending.id}> 
+                            <Link to={`/user_id/${user?.id}/recipe/${trending.id}`} key={trending.id}>
                                 <img src={trending.image} alt={trending.name} className="trending-img" />
-                                <h5 className='trending-name px-8 py-6 font-2-bold text-2xl'>{trending.name}</h5> 
-                                </div>
+                                <h5 className='trending-name px-8 py-6 font-2-bold text-2xl'>{trending.name}</h5>     
                             </Link>
                     </div>
                 </section>
@@ -62,7 +62,7 @@ const Home = () => {
                         <span id="scrLeft" onClick={scrLeft}></span>
                         <div className="popular-container inline-snap scroll-images">
                             {popular.map((recipe) => (
-                                <Link to={`/recipe/${recipe.id}`}>
+                                <Link to={`/user_id/${user?.id}/recipe/${recipe.id}`} key={recipe.id}>
                                     <Popular
                                         key={recipe.id}
                                         id={recipe.id}
@@ -78,7 +78,12 @@ const Home = () => {
                 </section>
             </div>
         </div>
-    )
+    ) : (
+        <div className="protected text-white">
+          <h3>Oops! You must be logged in to gain access to all this amazing recipes!</h3>
+          <button className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-200 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" onClick={() => navigate('/login')}>Login</button>
+        </div>
+      )
 }
 
 export default Home

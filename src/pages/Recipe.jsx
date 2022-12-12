@@ -3,55 +3,112 @@ import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTwitter, faFacebook } from '@fortawesome/free-brands-svg-icons'
+
 const Recipe = () => {
-  let {recipeId} = useParams()
+
+
+  let {userId, recipeId} = useParams()
   const [recipe, setRecipe] = useState([])
+  const [cartId, setCartId] = useState([])
 
   useEffect(() => {
+    // Get recipe with ingredient list
     const GetRecipesWithItems = async () => {
       const res = await axios.get(`http://localhost:3001/api/recipes/id/${recipeId}`)
       setRecipe(res.data)
+    }
+
+    const GetCartById = async () => {
+      const res = await axios.get(`http://localhost:3001/api/carts/cart_items/id/${userId}`)
+      setCartId(res.data)
       console.log(res.data)
     }
+
+    GetCartById()
     GetRecipesWithItems()
-  },[])
+  },[recipeId])
+
+
+  // Toggle adding and deleting from favorites
+  
+  const favOption = document.getElementById('addedFav')  
+  
+  const toggleFavorite = async () => {
+    if(favOption.innerHTML === "Remove From Favorites"){
+      await axios.delete(`http://localhost:3001/api/favorites/user_id/${userId}/recipe_id/${recipeId}`)
+      favOption.innerHTML = 'Add To Favorites'
+      favOption.style.color='#f0ad4e'
+    } else if(favOption.innerHTML === "Add To Favorites"){
+      await axios.post(`http://localhost:3001/api/favorites/create/user_id/${userId}/recipe_id/${recipeId}`)
+      favOption.innerHTML = "Remove From Favorites"
+      favOption.style.color='#d9534f'
+    }
+  }
+  
+  const toggleCart = async (e) => {
+    let itemId = e
+    await axios.post(`http://localhost:3001/api/carts/add_cart_item/cart_id/${cartId.id}/recipe_id/${recipeId}/item_id/${itemId.id}`)
+    alert(`${itemId.name} was added to your cart`)
+
+    // if(cartOption.innerText === "Remove From Cart"){
+    //   await axios.delete(`http://localhost:3001/api/favorites/user_id/${userId}/recipe_id/${recipeId}`)
+    //   alert(`${itemId.name} was deleted from your cart`)
+    // } else if(cartOption.innerText === "Remove From Cart"){
+    //   await axios.post(`http://localhost:3001/api/carts/add_cart_item/cart_id/${cartId.id}/recipe_id/${recipeId}/item_id/${itemId.id}`)
+    //   alert(`${itemId.name} was added to your cart`)
+    // }
+  }
 
   return(
-      <div className='min-h-screen container px-auto text-white' key={recipe.id}>
+    <div className='min-h-screen container px-auto text-white' key={recipe.id}>
+
+      <section className='text-center px-20 py-10'> 
+        <h1 className='text-6xl font-1-bold pt-6'>{recipe?.name}</h1>
+        <p className='text-2xl font-2 pt-10 pb-6'>{recipe?.description}</p>
+      </section>
+      <section className='flex flex-col'>
         <img src={recipe.image} alt={recipe.name} className="banner-image pt-20"/>
-        
-        <section className='text-center px-20 py-10'> 
-          <h1 className='text-6xl font-1-bold pt-6'>{recipe?.name}</h1>
-          <p className='text-2xl font-2 pt-10 pb-6'>{recipe?.description}</p>
-        </section>
-        <div className='flex place-content-around'>
-          <section className='relative top-14 py-8 solid-circle shadow-2xl'>
-            <div className="dotted-circle times-background">
-              <div className='text-2xl flex flex-col place-items-center relative top-24'> 
-                <p><span>Prep:&nbsp;</span>{recipe?.prep}</p>
-                <p><span>Cook:&nbsp;</span>{recipe?.cook}</p>
-                <p><span>Yield:&nbsp;</span>{recipe?.yield}</p>
-              </div>
-            </div>
-          </section>
-          <section className='text-black ingredients-background rounded mt-4 p-4'>
-            <h2 className='font-2-bold text-2xl'>Ingredients</h2>
-            <div className='text-lg'>
-              {recipe.recipe_items?.map((item) => (
-                <span className='flex content-center items-center item-container'><img src={item?.image} alt={item?.name} className='ingredient-size'/>&nbsp;&nbsp;&nbsp;{item?.name}&nbsp;&nbsp;&nbsp;<button class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-4 py-1 text-center mr-2 mb-2">Add to Cart</button></span>
-              ))}
-            </div>
-          </section>
+        <div className='flex justify-center items-start relative pt-4'>
+          <p className='font-2-bold text-xl'>Share:&nbsp;&nbsp;</p>
+          <a  href={`https://twitter.com/share?url=http://localhost:3000/recipe/${recipe.id}&text=${recipe.name}`} className='twitter-icon mx-2 text-2xl'><FontAwesomeIcon icon={faTwitter}/></a>
+          <a href={`https://www.facebook.com/sharer.php?u=http://localhost:3000/recipe/${recipe.id}`} className='facebook-icon mx-2 text-2xl'><FontAwesomeIcon icon={faFacebook}/></a>
+          <button onClick={toggleFavorite} className='font-2-bold favorite-icon text-xl text-black ml-8' id='addedFav'>Add To Favorites</button>
         </div>
-        <section className='py-10'>
-          <h2>Directions</h2>
-          <div>
-            {recipe.directions?.map((direction) =>(
-              <p>{direction}</p>
+      </section>
+      <div className='flex place-content-around'>
+        <section className='relative top-14 py-8 solid-circle shadow-2xl'>
+          <div className="dotted-circle times-background">
+            <div className='text-2xl flex flex-col place-items-center relative top-24'> 
+              <p><span>Prep:&nbsp;</span>{recipe?.prep}</p>
+              <p><span>Cook:&nbsp;</span>{recipe?.cook}</p>
+              <p><span>Yield:&nbsp;</span>{recipe?.yield}</p>
+            </div>
+          </div>
+        </section>
+        <section className='text-black ingredients-background rounded mt-4 p-4'>
+          <h2 className='font-2-bold text-2xl'>Ingredients</h2>
+          <div className='text-lg'>
+            {recipe.recipe_items?.map((item) => (
+              <span className='flex content-center items-center item-container' key={item.id}>
+                <img src={item?.image} alt={item?.name} className='ingredient-size' />
+                &nbsp;&nbsp;&nbsp;{item?.name}&nbsp;&nbsp;&nbsp;
+                <button onClick={() => toggleCart(item)} id="cart-option" className="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-4 py-1 text-center mr-2 mb-2">Add to Cart</button>
+              </span>
             ))}
           </div>
         </section>
       </div>
+      <section className='py-10'>
+        <h2>Directions</h2>
+        <div>
+          {recipe.directions?.map((direction) =>(
+            <p key={direction.id}>{direction}</p>
+          ))}
+        </div>
+      </section>
+    </div>
   )}
 
 export default Recipe

@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { RegisterUser } from '../services/Auth'
@@ -20,14 +21,19 @@ const Register = () => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value })
   }
 
+
+  const [userData, setUserData] = useState(null)
   const handleSubmit = async (e) => {
     e.preventDefault()
-    await RegisterUser({
+    const res = await RegisterUser({
       name: formValues.name,
       username: formValues.username,
       password: formValues.password
     })
-
+    setUserData(res.id)
+    console.log(res.id)
+    await axios.post(`http://localhost:3001/api/carts/user_id/${res.id}`)
+    
     setFormValues(initialState)
 
     navigate('/login')
@@ -105,7 +111,7 @@ const Register = () => {
             type="submit"
             className="submit-button"
             disabled={
-                !formValues.email ||
+                !formValues.username ||
                 (!formValues.password &&
                 formValues.confirmPassword === formValues.password)
             }
