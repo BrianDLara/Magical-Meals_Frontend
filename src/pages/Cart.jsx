@@ -26,7 +26,7 @@ const Cart = () => {
     }
     
     return (
-    <div className='min-h-screen text-white py-12'>
+    <div className='min-h-screen text-white py-4 sm:py-12'>
         <div className='sm:grid grid-cols-2 gap-1'>
             {cartItems.map((item) => (
                 <div className='cart-data-container' key={item.id}>
