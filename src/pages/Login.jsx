@@ -20,9 +20,10 @@ const Login = ({ toggleAuthenticated, setUser }) => {
   }
   return (
     <div className="login-container min-h-screen text-white">
-      <div className="card-overlay">
-        <form onSubmit={handleSubmit} className="login-form">
-          <div className="input-wrapper">
+        <form onSubmit={handleSubmit} className="w-full max-w-sm">
+          
+          {/* Username Section */}
+          <section className="input-wrapper">
             <label htmlFor="username">Username</label>
             <input
               onChange={handleChange}
@@ -33,8 +34,10 @@ const Login = ({ toggleAuthenticated, setUser }) => {
               className="input text-black"
               required
             />
-          </div>
-          <div className="input-wrapper">
+          </section>
+
+          {/* Password Section */}
+          <section className="input-wrapper">
             <label htmlFor="password">Password</label>
             <input
               onChange={handleChange}
@@ -45,23 +48,31 @@ const Login = ({ toggleAuthenticated, setUser }) => {
               className="input text-black"
               required
             />
-          </div>
+          </section>
+          
+          {/* Login Button */}
           <button
             disabled={!formValues.username || !formValues.password}
             className="form-button"
           >
             Login
           </button>
+
+          {/* Register message & Link */}
           <span id="register-container">
             <h3>Haven't made an account yet? &nbsp;</h3>
             <Link to="/register">
               <h3>Register Here</h3>
             </Link>
           </span>
-          <p>username: admin</p>
-          <p>password: admin</p>
+          
+          {/* Admin login */}
+          <div> 
+            <p>username: admin</p>
+            <p>password: admin</p>
+          </div>
         </form>
-      </div>
+      
     </div>
   )
 }
