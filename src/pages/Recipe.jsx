@@ -89,13 +89,13 @@ const Recipe = () => {
             </div>
           </div>
         </section>
-        <section className='mt-24 xl:mt-4 mx-10 xl:mx-0 text-black ingredients-background rounded p-4'>
+        <section className='mt-24 xl:mt-4 mx-4 xl:mx-0 text-black ingredients-background rounded p-4'>
           <h2 className='font-2-bold text-2xl'>Ingredients</h2>
           <div className='text-lg'>
             {recipe.recipe_items?.map((item) => (
               <span className='flex content-center items-center item-container' key={item.id}>
-                <img src={item?.image} alt={item?.name} className='ingredient-size' />
-                &nbsp;&nbsp;&nbsp;{item?.name}&nbsp;&nbsp;&nbsp;
+                <img src={item?.image} alt={item?.name} className='ingredient-size mr-2' />
+                <p className='mr-2'>{item?.name} </p>
                 <button onClick={() => toggleCart(item)} id="cart-option" className="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-4 py-1 text-center mr-2 mb-2">Add to Cart</button>
               </span>
             ))}
