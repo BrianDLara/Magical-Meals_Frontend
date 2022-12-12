@@ -324,6 +324,11 @@ main{
   object-fit:contain;
 }
 
+.kroger-image{
+  display:block;
+  height: 30px;
+}
+
 @media (max-width: 1279px){
 
   .banner-image-container{
