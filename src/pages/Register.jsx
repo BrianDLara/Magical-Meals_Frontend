@@ -40,76 +40,66 @@ const Register = () => {
   }
 
     return (
-    <div className="register-container w-full max-w-xs min-h-screen text-white container">
+    <div className="w-full max-w-xs min-h-screen text-white container pt-24">
         <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
-        {/* new user Full name */}
-        <section className="section-container top-section">
-            <div className="field-container">
-            <div className="field-text">
-                <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor="name">Name:</label>
-            </div>
+        {/* Full name */}
+        <section className="mb-4">                     
+            <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor="name">Name:</label>
+            
             <input
                 onChange={handleChange}
                 name="name"
                 type="text"
                 placeholder="Full Name"
                 value={formValues.name}
-                className="text-input text-black"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 required
             />
-            </div>
         </section>
-        <section className="section-container">
-            <div className="field-container">
-            <div className="field-text">
-                <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor="username">Username</label>
-            </div>
+        
+        {/* Username */}
+        <section className="mb-6">          
+            <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor="username">Username</label>           
             <input
                 onChange={handleChange}
                 name="username"
                 type="text"
                 placeholder="username"
                 value={formValues.username}
-                className="text-input text-black"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 required
-            />
-            </div>
+            />           
         </section>
-        <section className="section-container">
-            <div className="field-container">
-            <div className="field-text">
-                <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor="password">Password</label>
-            </div>
+        
+        {/* password inputs */}
+        <section className="mb-6">           
+            <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor="password">Password</label>         
             <input
                 onChange={handleChange}
                 name="password"
                 type="password"
                 placeholder="Password"
                 value={formValues.password}
-                className="text-input text-black"
+                className="mb-6 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 required
             />
-            </div>
-            <div className="field-container">
-            <div className="field-text">
-                <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor="confirmPassword">Confirm Password</label>
-            </div>
+            {/* confirm password */}
+            <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor="confirmPassword">Confirm Password</label>
             <input
                 onChange={handleChange}
                 type="password"
                 name="confirmPassword"
                 placeholder="Confirm Password"
                 value={formValues.confirmPassword}
-                className="text-input text-black"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 required
             />
-            </div>
         </section>
 
         <div className="submit-button-container">
             <button
             type="submit"
-            className="submit-button"
+            className="register-button hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             disabled={
                 !formValues.username ||
                 (!formValues.password &&

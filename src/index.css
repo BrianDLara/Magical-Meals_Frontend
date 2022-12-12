@@ -56,6 +56,12 @@ html {
   opacity: 0
 }
 
+/* register page */
+.register-button{
+  background-color: #30638e;
+}
+
+
 /* Home Page */
 .home-container{
   display: flex;
