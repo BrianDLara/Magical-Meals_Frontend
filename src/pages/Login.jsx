@@ -24,28 +24,28 @@ const Login = ({ toggleAuthenticated, setUser }) => {
           
           {/* Username Section */}
           <section className="mb-4">
-            <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor="username">Username</label>
+            <label className='text-lg font-2 block text-gray-700 text-sm font-bold mb-2' htmlFor="username">Username</label>
             <input
               onChange={handleChange}
               name="username"
               type="username"
               placeholder="Username"
               value={formValues.username}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="font-1 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               required
             />
           </section>
 
           {/* Password Section */}
           <section className="mb-6">
-            <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor="password">Password</label>
+            <label className='text-lg font-2 block text-gray-700 text-sm font-bold mb-2' htmlFor="password">Password</label>
             <input
               onChange={handleChange}
               type="password"
               name="password"
               placeholder="*********"
               value={formValues.password}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="font-1 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               required
             />
           </section>
@@ -60,9 +60,9 @@ const Login = ({ toggleAuthenticated, setUser }) => {
 
           {/* Register message & Link */}
           <span className='block text-gray-700 text-sm font-bold mb-2 mt-12 text-center'>
-            <h3>Haven't made an account yet? &nbsp;</h3>
+            <h3 className='text-lg font-2'>Haven't made an account? &nbsp;</h3>
             <Link to="/register">
-              <h3 className='text-green-700'>Register Here</h3>
+              <h3 className='text-xl font-1 text-green-700 mt-2'>Register Here</h3>
             </Link>
           </span>
           
