@@ -26,19 +26,18 @@ const Cart = () => {
     }
     
     return (
-    <div className='min-h-screen text-white'>
-        <div>
+    <div className='min-h-screen text-white py-12'>
+        <div className='sm:grid grid-cols-2 gap-1'>
             {cartItems.map((item) => (
-                <div className='flex items-center' key={item.id}>
-                    <img src={item.image} alt={item.name} width='50px'/>
-                    <h2>{item.name}</h2>
-                    <button onClick={() => handleDelete(item.id)} className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Remove From Cart</button>
+                <div className='cart-data-container' key={item.id}>
+                    <div className='flex justify-between'>
+                        <h2 className='font-2-bold'>{item.name}</h2>
+                        <button onClick={() => handleDelete(item.id)} className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Remove From Cart</button>
+                    </div>
+                    <img className="cart-image" src={item.image} alt={item.name} width='50px'/>
                 </div>
             ))}
-        </div>
-
-        
-        
+        </div> 
     </div>
   )
 }

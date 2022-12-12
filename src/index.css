@@ -304,6 +304,26 @@ main{
   object-fit:cover;
 }
 
+
+/* Cart page */
+.cart-data-container{
+  margin: 0 auto;
+  margin-top: 5rem;
+  width: 20rem;
+  height: 20rem;
+ 
+  overflow-y: hidden;
+
+
+  
+}
+
+.cart-image{
+  width: 20rem;
+  height: 18rem;
+  object-fit:cover;
+}
+
 @media (max-width: 1279px){
 
   .banner-image-container{
