@@ -62,16 +62,16 @@ const Login = ({ toggleAuthenticated, setUser }) => {
           <span className='block text-gray-700 text-sm font-bold mb-2 mt-12 text-center'>
             <h3 className='text-lg font-2'>Haven't made an account? &nbsp;</h3>
             <Link to="/register">
-              <h3 className='text-xl font-1 text-green-700 mt-2'>Register Here</h3>
+              <h3 className='text-xl font-2-bold text-green-700 mt-2'>Register Here</h3>
             </Link>
           </span>
-          
-          {/* Admin login */}
-          <div> 
-            <p>username: admin</p>
-            <p>password: admin</p>
-          </div>
         </form>
+          {/* Admin login */}
+          <div className='font-1 text-center text-2xl pt-2'> 
+            <p className='font-2-bold text-xl'>Quick Login:</p>
+            <p>Username: <span className='text-green-600'>admin</span></p>
+            <p>Password: <span className='text-green-600'>admin</span></p>
+          </div>
       
     </div>
   )
