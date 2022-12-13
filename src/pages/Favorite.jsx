@@ -44,7 +44,7 @@ const Favorite = () => {
                     <h3 className='font-2-bold'>{recipe.name}</h3>
                     <button onClick={() => handleDelete(recipe.id)} className="mb-2 font-2 text-white bg-transparent hover:bg-red-700 hover:text-white rounded-lg p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">Delete</button>
                   </div>
-                  <Link to={`/user_id//recipe/${recipe.id}`}> 
+                  <Link to={`/user_id/${userId}/recipe/${recipe.id}`}> 
                     <img src={recipe.image} alt={recipe.name} className="favorite-image"/>
                   </Link>
                 </div>
