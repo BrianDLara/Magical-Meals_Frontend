@@ -28,7 +28,7 @@ const Recipe = () => {
 
     GetCartById()
     GetRecipesWithItems()
-  },[recipeId])
+  },[recipeId, userId])
 
 
   // Toggle adding and deleting from favorites
@@ -52,14 +52,8 @@ const Recipe = () => {
     await axios.post(`http://localhost:3001/api/carts/add_cart_item/cart_id/${cartId.id}/recipe_id/${recipeId}/item_id/${itemId.id}`)
     alert(`${itemId.name} was added to your cart`)
 
-    // if(cartOption.innerText === "Remove From Cart"){
-    //   await axios.delete(`http://localhost:3001/api/favorites/user_id/${userId}/recipe_id/${recipeId}`)
-    //   alert(`${itemId.name} was deleted from your cart`)
-    // } else if(cartOption.innerText === "Remove From Cart"){
-    //   await axios.post(`http://localhost:3001/api/carts/add_cart_item/cart_id/${cartId.id}/recipe_id/${recipeId}/item_id/${itemId.id}`)
-    //   alert(`${itemId.name} was added to your cart`)
-    // }
   }
+
 
   return(
     <div className='min-h-screen container mx-auto text-white' key={recipe.id}>
