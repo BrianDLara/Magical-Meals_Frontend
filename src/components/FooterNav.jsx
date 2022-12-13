@@ -9,13 +9,13 @@ const FooterNav = ({authenticated, user}) => {
                 <a href="/about" class="mr-4 hover:underline md:mr-6 ">About</a>
             </li>
             <li>
-                <a href="#" class="mr-4 hover:underline md:mr-6">Privacy Policy</a>
+                <a href={`/cart/${user.id}`} class="mr-4 hover:underline md:mr-6">Cart</a>
             </li>
             <li>
-                <a href="#" class="mr-4 hover:underline md:mr-6 ">Licensing</a>
+                <a href={`/favorite/${user.id}`} class="mr-4 hover:underline md:mr-6 ">Favorite</a>
             </li>
             <li>
-                <a href="#" class="hover:underline">Contact</a>
+                <a href={`/settings/${user.id}`} class="hover:underline">Settings</a>
             </li>
         </ul>
         
