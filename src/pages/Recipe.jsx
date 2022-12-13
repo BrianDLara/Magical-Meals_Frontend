@@ -49,7 +49,7 @@ const Recipe = () => {
   
   const toggleCart = async (e) => {
     let itemId = e
-    await axios.post(`http://localhost:3001/api/carts/add_cart_item/cart_id/${cartId.id}/recipe_id/${recipeId}/item_id/${itemId.id}`)
+    await axios.post(`http://localhost:3001/api/carts/add_cart_item/cart_id/${cartId.id}/item_id/${itemId.id}`)
     alert(`${itemId.name} was added to your cart`)
 
   }

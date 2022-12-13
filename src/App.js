@@ -15,6 +15,7 @@ import Recipe from './pages/Recipe'
 import Favorite from './pages/Favorite'
 import Cart from './pages/Cart'
 import About from './pages/About'
+import Settings from './pages/Settings'
 
 function App() {
   const [authenticated, toggleAuthenticated] = useState(false)
@@ -71,6 +72,7 @@ function App() {
           <Route path="favorite/:userId" element={<Favorite />} />
           <Route path="cart/:userId" element={<Cart user={user} />} />
           <Route path="/about" element={<About />} />
+          <Route path="/settings" element={<Settings />} />
         </Routes>
       </main>
       <footer>

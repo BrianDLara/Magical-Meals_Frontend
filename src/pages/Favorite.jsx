@@ -33,7 +33,7 @@ const Favorite = () => {
     }
 
     return favorite !== null ? (
-        <div className='text-white min-h-screen'>
+        <div className='text-white min-h-screen pb-24'>
             <h2>
                 {favorite.name}
             </h2>
