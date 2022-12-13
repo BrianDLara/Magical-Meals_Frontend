@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React from 'react'
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useCallback} from 'react'
 import { useParams } from 'react-router-dom'
 
 const Cart = () => {
@@ -8,37 +8,43 @@ const Cart = () => {
 
     const [cartItems, setCartItems] = useState([])
     const [userInfo, setUserInfo] = useState(null)
+    const [total, setTotal] = useState(null)
     
     const handleRefresh = () => {
         window.location.reload(false);
-      }
+    }
     useEffect(() => {
         // get all the items from the user cart
         const getItems = async () => {
             const res = await axios.get(`http://localhost:3001/api/carts/cart_items/id/${userId}`)
             setCartItems(res.data.cart_items) 
-            console.log(res.data)
-                      
         }
-        // Sum all of the items price
-        const getTotal = () => {
-            let sum = 0
-            cartItems?.map((item) => {
-                sum += parseFloat(item.price)
-            })
-            setTotal(sum.toFixed(2))
-        }
-
+        
         // get user info
         const getUser = async () => {
             const user = await axios.get(`http://localhost:3001/api/users/id/${userId}`)
             setUserInfo(user)
         }
         
+        // Sum all of the items price
+        
+
         getUser()
-        getTotal()
         getItems()
-    }, [userId, cartItems])
+    }, [userId, total])
+
+    const getTotal = useCallback(() => {
+        let sum = 0
+        cartItems?.map((item) => {
+            sum += parseFloat(item.price)
+            return sum
+        })
+        setTotal(sum.toFixed(2))
+    }, [cartItems])
+
+    useEffect(() => {
+        getTotal()
+    }, [getTotal])
     
     const handleDelete = async (e) => {
         let itemId = e
@@ -46,11 +52,7 @@ const Cart = () => {
         handleRefresh()
     }
 
-    const [total, setTotal] = useState(null)
 
-    
-  
-  
     return (
     <div className='min-h-screen text-white py-4 pb-24 sm:py-12'>
         {/* <h1>Hi {userInfo.name}</h1> */}

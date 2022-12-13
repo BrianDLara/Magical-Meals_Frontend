@@ -13,8 +13,6 @@ const Favorite = () => {
         `http://localhost:3001/api/favorites/users_favorites/id/${userId}`
       )
       setFavorite(res.data)
-      console.log(res.data)
-      
     }, [userId])
     
     useEffect(() => {
