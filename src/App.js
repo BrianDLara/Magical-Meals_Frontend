@@ -72,7 +72,7 @@ function App() {
           <Route path="favorite/:userId" element={<Favorite />} />
           <Route path="cart/:userId" element={<Cart user={user} />} />
           <Route path="/about" element={<About />} />
-          <Route path="/settings" element={<Settings />} />
+          <Route path="/settings/:userId" element={<Settings />} />
         </Routes>
       </main>
       <footer>
