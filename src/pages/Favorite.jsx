@@ -34,8 +34,8 @@ const Favorite = () => {
 
     return favorite !== null ? (
         <div className='text-white min-h-screen pb-24'>
-            <h2>
-                {favorite.name}
+            <h2 className='pt-16 font-1-bold text-4xl text-center'>
+                Favorite Recipes
             </h2>
             <div>
               {favorite.user_favorites.map((recipe) => (
