@@ -27,3 +27,12 @@ export const CheckSession = async () => {
     throw error
   }
 }
+
+export const UpdateAmount = async (data) => {
+  try {
+    const res = await Client.put(`/items/update/${data.itemId}`, data)
+    return res.data
+  } catch (error) {
+    throw error
+  }
+}

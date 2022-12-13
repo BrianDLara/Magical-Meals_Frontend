@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react'
 import { CheckSession } from './services/Auth'
 
 import Nav from './components/Nav'
+import FooterNav from './components/FooterNav'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import Home from './pages/Home'
@@ -70,6 +71,9 @@ function App() {
           <Route path="cart/:userId" element={<Cart user={user} />} />
         </Routes>
       </main>
+      <footer>
+        <FooterNav authenticated={authenticated} user={user} />
+      </footer>
     </div>
   )
 }

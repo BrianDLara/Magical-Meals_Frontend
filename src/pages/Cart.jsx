@@ -3,11 +3,12 @@ import React from 'react'
 import {useState, useEffect, useCallback} from 'react'
 import { useParams } from 'react-router-dom'
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import {loadStripe} from '@stripe/stripe-js';
+
+// import { UpdateAmount } from '../services/Auth'
 
 const CLIENT_ID = process.env.REACT_APP_PAYPAL_CLIENT_ID
-const CLIENT_SECRET = process.env.REACT_APP_STRIPE_KEY
-const PUBLISHABLE_KEY = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY
+
+
 
 
 
@@ -21,6 +22,23 @@ const Cart = () => {
     const handleRefresh = () => {
         window.location.reload(false);
     }
+
+    //add and subtract item
+    
+    // const addOne = async(e) => {
+    //     let itemId = e.id
+    //     let amount = e.amount
+    //   await UpdateAmount({itemId, amount: amount + 1}) 
+    //   }
+      
+    //   const removeOne = async(e) => {
+    //     let itemId = e.id
+    //     let amount = e.amount
+    //     await UpdateAmount({itemId, amount: amount + 1})
+    //   } 
+
+      
+
     useEffect(() => {
         // get all the items from the user cart
         const getItems = async () => {
@@ -30,8 +48,8 @@ const Cart = () => {
         
         // get user info
         const getUser = async () => {
-            const user = await axios.get(`http://localhost:3001/api/users/id/${userId}`)
-            setUserInfo(user)
+            const res = await axios.get(`http://localhost:3001/api/users/id/${userId}`)
+            setUserInfo(res.data)
         }
         
         // Sum all of the items price
@@ -68,14 +86,10 @@ const Cart = () => {
         intent: "capture",
     };
 
-    // stripe
 
-    const stripePromise = loadStripe(`${PUBLISHABLE_KEY}`);
-
-
-    return cartItems !== null ? (
+    return cartItems !== null || userInfo !== null ? (
     <div className='min-h-screen text-white py-4 pb-24 sm:py-12'>
-        {/* <h1>Hi {userInfo.name}</h1> */}
+        <h1 className='font-2-bold text-lg md:text-2xl text-center py-10 mx-4 sm:mx-32 lg:mx-48'>Hi {userInfo?.name} We are partnered with Kroger to help us get the items to you as fast as possible just confirm your shopping cart list, and proceed to payment</h1>
         <div className='flex flex-col text-center justify-center pt-6'>
             <p className='text-2xl font-1-bold'>Total: &nbsp;${total}</p>
             <div className='flex items-center justify-center pt-4'>
@@ -110,8 +124,12 @@ const Cart = () => {
                         <h2 className='font-2-bold'>{item.name}</h2>
                         <button onClick={() => handleDelete(item.id)} className="font-2-bold focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 rounded-lg text-sm px-3 py-2.5 mr-3 mb-4 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Remove</button>
                     </div>
-                    <img className="cart-image" src={item.image} alt={item.name} width='50px'/>
-                    <p>amount: {item.amount}</p>
+                    <img className="cart-image mb-2" src={item.image} alt={item.name} width='50px'/>
+                    {/* <div className='flex items-center justify-center text-lg'>
+                        <p className=' pr-4'>amount: {item.amount}</p>
+                        <button onClick={() => addOne(item)} id="add" className='review-likes review-rating'> +&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                        <button onClick={() => removeOne(item)} id="remove" className='review-dislikes review-rating'> -&nbsp;&nbsp;</button>
+                    </div> */}
                 </div>
             ))}
         </div> 
