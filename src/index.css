@@ -410,7 +410,7 @@ main{
     position: absolute;
     right: 0px;
     top: -98px;
-    z-index: 100;
+    z-index: 10000;
     width: 70px;
     height: 182px;
     background: transparent;
@@ -437,6 +437,7 @@ main{
     transform-origin: center;
     -webkit-transition: .5s ease-in-out;
     transition: .5s ease-in-out;
+    
   }
   
   label .hamburger:after, label .hamburger:before {
@@ -449,6 +450,7 @@ main{
     height: 100%;
     background:  #0D6EFD
     ;
+    
   }
   
   label .hamburger:before { top: -10px; }
@@ -464,7 +466,7 @@ main{
     box-shadow: 0 0 0 100vw #ffffff, 0 0 0 100vh #FFF;
     border-radius: 0;
     color: white;
-    z-index: 1;
+    z-index: 1000;
     text-align: center;
   }
   
@@ -473,7 +475,6 @@ main{
   label input:checked + .menu .hamburger {
     -webkit-transform: rotate(45deg);
     transform: rotate(45deg);
-    
   }
   
   
