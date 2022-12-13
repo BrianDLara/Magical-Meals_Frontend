@@ -2,6 +2,10 @@ import axios from 'axios'
 import React from 'react'
 import {useState, useEffect, useCallback} from 'react'
 import { useParams } from 'react-router-dom'
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+const CLIENT_ID = process.env.REACT_APP_PAYPAL_CLIENT_ID
+console.log(CLIENT_ID)
+
 
 const Cart = () => {
     let {userId} = useParams()
@@ -52,15 +56,40 @@ const Cart = () => {
         handleRefresh()
     }
 
+    const initialOptions = {
+        "client-id": CLIENT_ID,
+        currency: "USD",
+        intent: "capture",
+    };
+
 
     return (
     <div className='min-h-screen text-white py-4 pb-24 sm:py-12'>
         {/* <h1>Hi {userInfo.name}</h1> */}
-        
         <div className='flex justify-center pt-6'>
             <p className='text-2xl font-1-bold'>Total: &nbsp;${total}</p>
         </div>
-        
+        <PayPalScriptProvider options={initialOptions}>
+        <PayPalButtons
+                createOrder={(data, actions) => {
+                    return actions.order.create({
+                        purchase_units: [
+                            {
+                                amount: {
+                                    value: `${total}`
+                                },
+                            },
+                        ],
+                    });
+                }}
+                onApprove={(data, actions) => {
+                    return actions.order.capture().then((details) => {
+                        const name = details.payer.name.given_name;
+                        alert(`Transaction completed by ${name}`);
+                    });
+                }}
+            />
+        </PayPalScriptProvider>
         <div className='flex justify-center pt-6'>
             <span> <button className="font-2-bold text-xl focus:outline-none text-white bg-amber-500 hover:bg-amber-500 focus:ring-4 focus:ring-amber-300 font-medium rounded-lg text-sm px-8 py-2.5 mr-2 mb-2 dark:focus:ring-amber-900">Purchase At <img src="https://i.imgur.com/aZSOcMJ.png" alt="kroger" className='kroger-image' /></button></span>
         </div>
