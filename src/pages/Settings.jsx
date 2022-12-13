@@ -3,9 +3,18 @@ import {useState, useEffect} from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 
 const Settings = () => {
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   
-  
+  useEffect(() => {
+    // get user info
+    const getUser = async () => {
+        const res = await axios.get(`http://localhost:3001/api/users/id/${userId}`)
+        setUserInfo(res.data)
+    }
+    
+    getUser()
+
+}, [userId])
   
   const [formValues, setFormValues] = useState({name:'', username: '', password: '' })
 
