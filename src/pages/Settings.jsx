@@ -1,30 +1,61 @@
+import axios from 'axios'
 import React from 'react'
+import { useParams } from 'react-router-dom'
 import {useState, useEffect} from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { UpdateUser } from '../services/Auth'
+
+// import { useNavigate, Link } from 'react-router-dom'
 
 const Settings = () => {
   // const navigate = useNavigate()
+  let {userId} = useParams()
+  const [userName, setUserName] = useState(null)
+  const [userUsername, setUserUsername] = useState(null)
   
   useEffect(() => {
     // get user info
     const getUser = async () => {
-        const res = await axios.get(`http://localhost:3001/api/users/id/${userId}`)
-        setUserInfo(res.data)
+      const res = await axios.get(`http://localhost:3001/api/users/id/${userId}`)
+      setUserName(res.data.name)
+      setUserUsername(res.data.username)
+      
+      
     }
     
     getUser()
-
-}, [userId])
+    
+  }, [userId])
   
-  const [formValues, setFormValues] = useState({name:'', username: '', password: '' })
-
-
-
-  const handleChange = (e) => {
-    setFormValues({ ...formValues, [e.target.name]: e.target.value })
+  
+  const userInitialState = {
+    name: userName,
+    username: userUsername,
   }
-  const handleSubmit = async (e) => {
-    // e.preventDefault()
+
+  const passwordInitialState = {
+    oldPassword: '',
+    newPassword: '',
+  }
+  const [userFormValues, setUserFormValues] = useState(userInitialState)
+  const [passwordFormValues, setPasswordFormValues] = useState(passwordInitialState)
+
+
+
+  const userHandleChange = (e) => {
+    setUserFormValues({ ...userFormValues, [e.target.name]: e.target.value })
+  }
+  const passwordHandleChange = (e) => {
+    setPasswordFormValues({ ...passwordFormValues, [e.target.name]: e.target.value })
+  }
+  
+  const updateUser = async (e) => {
+    e.preventDefault()
+    await UpdateUser({userId, userFormValues})
+    // navigate('/')
+  }
+
+  const updatePassword = async (e) => {
+    e.preventDefault()
     // const payload = await SignInUser(formValues)
     // setFormValues({ username: '', password: '' })
     // setUser(payload)
@@ -33,17 +64,20 @@ const Settings = () => {
   }
 
   return (
-    <div className="text-lg w-full max-w-xs min-h-screen text-white container pt-24">
-        <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">        
+    <div className="text-lg w-full max-w-xs min-h-screen text-white container pt-12 pb-24">
+        <h1 className='font-2-bold text-xl md:text-2xl text-center mx-4 pb-10'>Update Your Current Info</h1>
+        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">        
           {/* Username Section */}
+          <p className='font-1 text-3xl text-center  block text-gray-700 text-sm font-bold mb-2 pb-4'>update Info</p>
+
           <section className="mb-4">
-            <label className='text-lg font-2 block text-gray-700 text-sm font-bold mb-2' htmlFor="name">Current Name</label>
+            <label className='text-lg font-2 block text-gray-700 text-sm font-bold mb-2' htmlFor="name">Name</label>
             <input
-              onChange={handleChange}
+              onChange={userHandleChange}
               name="name"
               type="name"
-              placeholder="Name"
-              value={formValues.name}
+              placeholder={`Current Name: ${userName}`}
+              value={userFormValues.name}
               className="font-1 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               required
             />
@@ -51,38 +85,56 @@ const Settings = () => {
 
           {/* Username Section */}
           <section className="mb-4">
-            <label className='text-lg font-2 block text-gray-700 text-sm font-bold mb-2' htmlFor="username">Current Username</label>
+            <label className='text-lg font-2 block text-gray-700 text-sm font-bold mb-2' htmlFor="username">Username</label>
             <input
-              onChange={handleChange}
+              onChange={userHandleChange}
               name="username"
               type="username"
-              placeholder="Username"
-              value={formValues.username}
+              placeholder={`current username: ${userUsername}`}
+              value={userFormValues.username}
+              className="font-1 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              required
+            />
+          </section>
+          {/* Update User*/}
+          <button
+            onClick={updateUser} className="mb-8 register-button hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          >
+            Update
+          </button>
+          <p className='form-border font-1 text-3xl text-center  block text-gray-700 text-sm font-bold mb-2 pt-10 mt-2 pb-4'>update password</p>
+          {/* Password Section */}
+          <section className="mb-6">
+            <label className='text-lg font-2 block text-gray-700 text-sm font-bold mb-2' htmlFor="oldPassword">Current Password</label>
+            <input
+              onChange={passwordHandleChange}
+              type="text"
+              name="oldPassword"
+              placeholder=''
+              value={passwordFormValues.oldPassword}
               className="font-1 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               required
             />
           </section>
 
-          {/* Password Section */}
           <section className="mb-6">
-            <label className='text-lg font-2 block text-gray-700 text-sm font-bold mb-2' htmlFor="password">Current Password</label>
+            <label className='text-lg font-2 block text-gray-700 text-sm font-bold mb-2' htmlFor="newPassword">New Password</label>
             <input
-              onChange={handleChange}
-              type="password"
-              name="password"
-              placeholder="*********"
-              value={formValues.password}
+              onChange={passwordHandleChange}
+              type="text"
+              name="newPassword"
+              placeholder=''
+              value={passwordFormValues.newPassword}
               className="font-1 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               required
             />
           </section>
           
-          {/* Login Button */}
+          {/* password Button */}
           <button
-            disabled={!formValues.username || !formValues.password}
-            className="register-button hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          onClick={updatePassword}  className="register-button hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
-            Update Info
+            Update Password
           </button>
 
         </form>

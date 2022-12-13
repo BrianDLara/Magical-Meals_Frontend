@@ -329,6 +329,11 @@ main{
   height: 30px;
 }
 
+/* Update form */
+.form-border{
+  border-top: 3px solid rgb(157, 154, 154);
+}
+
 @media (max-width: 1279px){
 
   .banner-image-container{
