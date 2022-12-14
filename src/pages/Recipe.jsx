@@ -2,6 +2,8 @@ import React from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import {BASE_URL} from '../globals'
+
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTwitter, faFacebook } from '@fortawesome/free-brands-svg-icons'
@@ -16,12 +18,12 @@ const Recipe = () => {
   useEffect(() => {
     // Get recipe with ingredient list
     const GetRecipesWithItems = async () => {
-      const res = await axios.get(`http://localhost:3001/api/recipes/id/${recipeId}`)
+      const res = await axios.get(`${BASE_URL}recipes/id/${recipeId}`)
       setRecipe(res.data)
     }
 
     const GetCartById = async () => {
-      const res = await axios.get(`http://localhost:3001/api/carts/cart_items/id/${userId}`)
+      const res = await axios.get(`${BASE_URL}carts/cart_items/id/${userId}`)
       setCartId(res.data)
       console.log(res.data)
     }
@@ -37,11 +39,11 @@ const Recipe = () => {
   
   const toggleFavorite = async () => {
     if(favOption.innerHTML === "Remove From Favorites"){
-      await axios.delete(`http://localhost:3001/api/favorites/user_id/${userId}/recipe_id/${recipeId}`)
+      await axios.delete(`${BASE_URL}favorites/user_id/${userId}/recipe_id/${recipeId}`)
       favOption.innerHTML = 'Add To Favorites'
       favOption.style.color='#f0ad4e'
     } else if(favOption.innerHTML === "Add To Favorites"){
-      await axios.post(`http://localhost:3001/api/favorites/create/user_id/${userId}/recipe_id/${recipeId}`)
+      await axios.post(`${BASE_URL}favorites/create/user_id/${userId}/recipe_id/${recipeId}`)
       favOption.innerHTML = "Remove From Favorites"
       favOption.style.color='#d9534f'
     }
@@ -49,7 +51,7 @@ const Recipe = () => {
   
   const toggleCart = async (e) => {
     let itemId = e
-    await axios.post(`http://localhost:3001/api/carts/add_cart_item/cart_id/${cartId.id}/item_id/${itemId.id}`)
+    await axios.post(`${BASE_URL}carts/add_cart_item/cart_id/${cartId.id}/item_id/${itemId.id}`)
     alert(`${itemId.name} was added to your cart`)
 
   }

@@ -3,6 +3,8 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import {useState, useEffect} from 'react'
 import { UpdateUser } from '../services/Auth'
+import {BASE_URL} from '../globals'
+
 
 // import { useNavigate, Link } from 'react-router-dom'
 
@@ -15,7 +17,7 @@ const Settings = () => {
   useEffect(() => {
     // get user info
     const getUser = async () => {
-      const res = await axios.get(`http://localhost:3001/api/users/id/${userId}`)
+      const res = await axios.get(`${BASE_URL}users/id/${userId}`)
       setUserName(res.data.name)
       setUserUsername(res.data.username)
       

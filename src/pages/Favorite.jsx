@@ -2,6 +2,8 @@ import React from 'react'
 import { useState, useEffect, useCallback } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import axios from 'axios'
+import {BASE_URL} from '../globals'
+
 
 const Favorite = () => {
     const { userId } = useParams()
@@ -10,7 +12,7 @@ const Favorite = () => {
   
     const getUserFavorites = useCallback(async () => {
       const res = await axios.get(
-        `http://localhost:3001/api/favorites/users_favorites/id/${userId}`
+        `${BASE_URL}favorites/users_favorites/id/${userId}`
       )
       setFavorite(res.data)
     }, [userId])
@@ -28,7 +30,7 @@ const Favorite = () => {
       let recipeId = e
       // console.log(recipeId)
       
-      await axios.delete(`http://localhost:3001/api/favorites/user_id/${userId}/recipe_id/${recipeId}`)
+      await axios.delete(`${BASE_URL}favorites/user_id/${userId}/recipe_id/${recipeId}`)
       handleRefresh();
     }
 
