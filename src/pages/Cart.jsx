@@ -34,8 +34,8 @@ const Cart = () => {
         
         // get user info
         const getUser = async () => {
-            const res = await axios.get(`${BASE_URL}api/users/id/${userId}`)
-            setUserInfo(res.data)
+            const res = await axios.get(`${BASE_URL}users/id/${userId}`)
+            setUserInfo(res.data)      
         }
         
         // Sum all of the items price
@@ -104,13 +104,13 @@ const Cart = () => {
         </div>
         
         <div className='sm:grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-1'>
-            {cartItems.map((item) => (
-                <div className='cart-data-container' key={item.id}>
+            {cartItems?.map((item) => (
+                <div className='cart-data-container' key={item?.id}>
                     <div className='mx-10 flex justify-between items-center'>
-                        <h2 className='font-2-bold'>{item.name}</h2>
+                        <h2 className='font-2-bold'>{item?.name}</h2>
                         <button onClick={() => handleDelete(item.id)} className="font-2-bold focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 rounded-lg text-sm px-3 py-2.5 mr-3 mb-4 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Remove</button>
                     </div>
-                    <img className="cart-image mb-2" src={item.image} alt={item.name} width='50px'/>
+                    <img className="cart-image mb-2" src={item?.image} alt={item?.name} width='50px'/>
                     {/* <div className='flex items-center justify-center text-lg'>
                         <p className=' pr-4'>amount: {item.amount}</p>
                         <button onClick={() => addOne(item)} id="add" className='review-likes review-rating'> +&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
