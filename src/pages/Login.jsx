@@ -3,6 +3,9 @@ import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { SignInUser } from '../services/Auth'
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Login = ({ toggleAuthenticated, setUser }) => {
   const navigate = useNavigate()
   const [formValues, setFormValues] = useState({ username: '', password: '' })
@@ -10,9 +13,18 @@ const Login = ({ toggleAuthenticated, setUser }) => {
   const handleChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value })
   }
+  
+  const notifyUser = () => toast.error("Username or Password did not match your login credentials!");
+  
+  
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const payload = await SignInUser(formValues)
+    const payload = await SignInUser(formValues).catch(
+      function (error) {
+        notifyUser()
+        return Promise.reject(error)
+      }
+    )
     setFormValues({ username: '', password: '' })
     setUser(payload)
     toggleAuthenticated(true)
@@ -20,6 +32,18 @@ const Login = ({ toggleAuthenticated, setUser }) => {
   }
   return (
     <div className="text-lg w-full max-w-xs min-h-screen text-white container pt-24">
+        <ToastContainer
+            position="top-right"
+            autoClose={4000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+            />
         <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
           
           {/* Username Section */}

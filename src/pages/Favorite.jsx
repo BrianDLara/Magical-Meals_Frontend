@@ -4,6 +4,9 @@ import { Link, useParams } from 'react-router-dom'
 import axios from 'axios'
 import {BASE_URL} from '../globals'
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Favorite = () => {
     const { userId } = useParams()
@@ -21,9 +24,25 @@ const Favorite = () => {
       getUserFavorites()
     }, [getUserFavorites])
 
-    const handleRefresh = () => {
-      window.location.reload(false);
+    
+    // window reload storage
+    const success = () => {
+      toast.success("Recipe was successfully deleted!");
     }
+
+    window.onload = function() {
+      let reloading = sessionStorage.getItem("reloading");
+      if (reloading) {
+          sessionStorage.removeItem("reloading");
+          success();
+      }
+    }
+    
+    const handleRefresh = () => {
+    sessionStorage.setItem("reloading", "true");
+    document.location.reload();
+    }
+    
     
     const handleDelete = async (e) => {
       
@@ -36,6 +55,19 @@ const Favorite = () => {
 
     return favorite !== null ? (
         <div className='text-white min-h-screen pb-24'>
+            <ToastContainer
+            position="top-right"
+            autoClose={4000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+            />
+            
             <h2 className='pt-16 font-1-bold text-4xl text-center'>
                 Favorite Recipes
             </h2>

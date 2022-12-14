@@ -2,20 +2,14 @@ import axios from 'axios'
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import {useState, useEffect, useCallback} from 'react'
-import { UpdateUser } from '../services/Auth'
+import { UpdateUser, UpdatePassword } from '../services/Auth'
 import {BASE_URL} from '../globals'
 
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-// import { useNavigate, Link } from 'react-router-dom'
-
 const Settings = () => {
-  // const [user, setUser] = useState(null)
-  // const [userUsername, setUserUsername] = useState(null)
-  
-  
   const userInitialState = {
     name: '',
     username: '',
@@ -25,7 +19,7 @@ const Settings = () => {
     oldPassword: '',
     newPassword: '',
   }
-  // const navigate = useNavigate()
+ 
   let {userId} = useParams()
   const [userFormValues, setUserFormValues] = useState(userInitialState)
   const [passwordFormValues, setPasswordFormValues] = useState(passwordInitialState)
@@ -40,43 +34,59 @@ const Settings = () => {
       
     }, [userId])
     
+    useEffect(() => {
+      getUser()
+    },[getUser])
   
-  
-  useEffect(() => {
-    getUser()
-  },[getUser])
-  // console.log(user)
-  
-  
-  const handleRefresh = () => {
-    window.location.reload(false);
-}
-
-  const userHandleChange = (e) => {
-    setUserFormValues({ ...userFormValues, [e.target.name]: e.target.value })
-  }
-  const passwordHandleChange = (e) => {
-    setPasswordFormValues({ ...passwordFormValues, [e.target.name]: e.target.value })
-  }
-  
-  const notify = () => toast.info("User was successfully updated!");
-  
-    const updateUser = async (e) => {
-      e.preventDefault()
-      await UpdateUser({userId, ...userFormValues})
-      // handleRefresh()
-      // setUserFormValues(userInitialState)
-      notify()
+    // handles user form changes
+    const userHandleChange = (e) => {
+      setUserFormValues({ ...userFormValues, [e.target.name]: e.target.value })
     }
+    
+    // handles password form changes
+    const passwordHandleChange = (e) => {
+      setPasswordFormValues({ ...passwordFormValues, [e.target.name]: e.target.value })
+    }
+  
+    // update user function
+    const updateUser = async (e) => {
+      e.preventDefault()   
+      await UpdateUser({userId, ...userFormValues})
+      toast.info("User was successfully updated!");
+      }
+    
+      // window reload storage
+      const failed = () => {
+        toast.info("Password was successfully updated!");
+      }
+  
+      window.onload = function() {
+        let reloading = sessionStorage.getItem("reloading");
+        if (reloading) {
+            sessionStorage.removeItem("reloading");
+            failed();
+        }
+      }
+      
+      const handleRefresh = () => {
+      sessionStorage.setItem("reloading", "true");
+      document.location.reload();
+      }
 
-  const updatePassword = async (e) => {
-    // e.preventDefault()
-    // const payload = await SignInUser(formValues)
-    // setFormValues({ username: '', password: '' })
-    // setUser(payload)
-    // toggleAuthenticated(true)
-    // navigate('/')
-  }
+      // update password function with screen reload
+      const updatePassword = async (e) => {
+        e.preventDefault()
+        await UpdatePassword({userId, ...passwordFormValues}).catch(
+          function (error) {
+            toast.error("Failed to update Password! Current password did not match");
+            return Promise.reject(error)
+          }
+        )
+        handleRefresh()
+        // handleRefresh()
+      }
+    
+   
 
 
 
