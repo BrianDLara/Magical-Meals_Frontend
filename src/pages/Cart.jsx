@@ -45,16 +45,17 @@ const Cart = () => {
         let sum = 0
         cartItems?.map((item) => {
             sum += parseFloat(item.price)
-            return sum
+            // return sum
+            setTotal(sum.toFixed(2)) 
         })
-        setTotal(sum.toFixed(2))
     }, [cartItems])
-
+    
     useEffect(() => {
         getTotal()
     }, [getTotal])
     
-    
+    console.log(total)
+    let finalPrice = total
     // window reload storage
     const success = () => {
         toast.success("Grocery Item was successfully deleted!");
@@ -114,7 +115,7 @@ const Cart = () => {
                                 purchase_units: [
                                     {
                                         amount: {
-                                            value: `${total}`
+                                            value: `${finalPrice}`
                                         },
                                     },
                                 ],

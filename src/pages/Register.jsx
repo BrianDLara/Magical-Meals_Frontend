@@ -23,8 +23,6 @@ const Register = () => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value })
   }
 
-
-  const [userData, setUserData] = useState(null)
   const handleSubmit = async (e) => {
     e.preventDefault()
     const res = await RegisterUser({
@@ -32,8 +30,6 @@ const Register = () => {
       username: formValues.username,
       password: formValues.password
     })
-    setUserData(res.id)
-    console.log(res.id)
     await axios.post(`${BASE_URL}carts/user_id/${res.id}`)
     
     setFormValues(initialState)
