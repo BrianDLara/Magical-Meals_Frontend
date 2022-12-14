@@ -1,7 +1,7 @@
 import Axios from 'axios'
 
-// export const BASE_URL = 'https://the-faults-in-our-stars.herokuapp.com/api/'
-export const BASE_URL = 'http://localhost:3001/api/'
+export const BASE_URL = 'https://magic-meals-backend.herokuapp.com/api/'
+// export const BASE_URL = 'http://localhost:3001/api/'
 
 const Client = Axios.create({ baseURL: BASE_URL })
 

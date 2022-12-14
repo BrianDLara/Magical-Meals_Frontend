@@ -55,7 +55,7 @@ const Settings = () => {
   }
 
   const updatePassword = async (e) => {
-    e.preventDefault()
+    // e.preventDefault()
     // const payload = await SignInUser(formValues)
     // setFormValues({ username: '', password: '' })
     // setUser(payload)

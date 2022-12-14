@@ -3,6 +3,8 @@ import axios from 'axios'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { RegisterUser } from '../services/Auth'
+import {BASE_URL} from '../globals'
+
 
 const Register = () => {
   const initialState = {
@@ -32,7 +34,7 @@ const Register = () => {
     })
     setUserData(res.id)
     console.log(res.id)
-    await axios.post(`http://localhost:3001/api/carts/user_id/${res.id}`)
+    await axios.post(`${BASE_URL}carts/user_id/${res.id}`)
     
     setFormValues(initialState)
 

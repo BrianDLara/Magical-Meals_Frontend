@@ -3,7 +3,7 @@ import React from 'react'
 import {useState, useEffect, useCallback} from 'react'
 import { useParams } from 'react-router-dom'
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-
+import {BASE_URL} from '../globals'
 // import { UpdateAmount } from '../services/Auth'
 
 const CLIENT_ID = process.env.REACT_APP_PAYPAL_CLIENT_ID
@@ -23,32 +23,18 @@ const Cart = () => {
         window.location.reload(false);
     }
 
-    //add and subtract item
-    
-    // const addOne = async(e) => {
-    //     let itemId = e.id
-    //     let amount = e.amount
-    //   await UpdateAmount({itemId, amount: amount + 1}) 
-    //   }
-      
-    //   const removeOne = async(e) => {
-    //     let itemId = e.id
-    //     let amount = e.amount
-    //     await UpdateAmount({itemId, amount: amount + 1})
-    //   } 
-
       
 
     useEffect(() => {
         // get all the items from the user cart
         const getItems = async () => {
-            const res = await axios.get(`http://localhost:3001/api/carts/cart_items/id/${userId}`)
+            const res = await axios.get(`${BASE_URL}carts/cart_items/id/${userId}`)
             setCartItems(res.data.cart_items) 
         }
         
         // get user info
         const getUser = async () => {
-            const res = await axios.get(`http://localhost:3001/api/users/id/${userId}`)
+            const res = await axios.get(`${BASE_URL}api/users/id/${userId}`)
             setUserInfo(res.data)
         }
         
@@ -74,7 +60,7 @@ const Cart = () => {
     
     const handleDelete = async (e) => {
         let itemId = e
-        await axios.delete(`http://localhost:3001/api/carts/item_id/${itemId}`)
+        await axios.delete(`${BASE_URL}api/carts/item_id/${itemId}`)
         handleRefresh()
     }
 

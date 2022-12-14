@@ -3,6 +3,8 @@ import React from 'react'
 import Popular from '../components/Popular'
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import {BASE_URL} from '../globals'
+
 
 const Home = ({user, authenticated}) => {
     const navigate = useNavigate()
@@ -12,12 +14,12 @@ const Home = ({user, authenticated}) => {
 
     useEffect(()=> {
         const getTrendingRecipes = async () => {
-            const res = await axios.get(`http://localhost:3001/api/recipes/get_all`)    
+            const res = await axios.get(`${BASE_URL}recipes/get_all`)    
             setTrending(res.data[Math.floor(Math.random() * res.data.length)])            
         }
 
         const getPopularRecipes = async () => {
-            const res = await axios.get(`http://localhost:3001/api/recipes/get_all`)    
+            const res = await axios.get(`${BASE_URL}recipes/get_all`)    
             setPopular(res.data)            
         }
 
