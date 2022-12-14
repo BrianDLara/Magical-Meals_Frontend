@@ -28,6 +28,8 @@ const Settings = () => {
     
   }, [userId])
   
+  console.log(userName)
+  
   
   const userInitialState = {
     name: userName,
@@ -52,7 +54,7 @@ const Settings = () => {
   
   const updateUser = async (e) => {
     e.preventDefault()
-    await UpdateUser({userId, userFormValues})
+    await UpdateUser({userId, ...userFormValues})
     // navigate('/')
   }
 
