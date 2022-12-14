@@ -4,7 +4,8 @@ import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import {BASE_URL} from '../globals'
 
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTwitter, faFacebook } from '@fortawesome/free-brands-svg-icons'
 
@@ -48,10 +49,15 @@ const Recipe = () => {
     }
   }
   
+
+    const notify = () => toast.info("Item added to cart!");
+  
+ 
+
   const toggleCart = async (e) => {
     let itemId = e
     await axios.post(`${BASE_URL}carts/add_cart_item/cart_id/${cartId?.id}/item_id/${itemId?.id}`)
-    alert(`${itemId?.name} was added to your cart`)
+    notify()
   }
 
   return(
@@ -85,6 +91,18 @@ const Recipe = () => {
         <section className='mt-24 xl:mt-4 mx-4 xl:mx-0 text-black ingredients-background rounded p-4'>
           <h2 className='font-2-bold text-2xl'>Ingredients</h2>
           <div className='text-lg'>
+            <ToastContainer
+            position="top-right"
+            autoClose={1300}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+            />
             {recipe.recipe_items?.map((item) => (
               <span className='flex content-center items-center item-container' key={item?.id}>
                 <img src={item?.image} alt={item?.name} className='ingredient-size mr-2' />

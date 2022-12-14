@@ -28,6 +28,15 @@ export const UpdateUser = async (data) => {
   }
 }
 
+export const UpdatePassword = async (data) => {
+  try {
+    const res = await Client.put(`/update_password/id/${data.userId}`, data)
+    return res.data
+  } catch (error) {
+    throw error
+  }
+}
+
 export const CheckSession = async () => {
   try {
     const res = await Client.get('/auth/session')

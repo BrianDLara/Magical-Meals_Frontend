@@ -1,49 +1,56 @@
 import axios from 'axios'
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useCallback} from 'react'
 import { UpdateUser } from '../services/Auth'
 import {BASE_URL} from '../globals'
 
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 // import { useNavigate, Link } from 'react-router-dom'
 
 const Settings = () => {
-  // const navigate = useNavigate()
-  let {userId} = useParams()
-  const [userName, setUserName] = useState(null)
-  const [userUsername, setUserUsername] = useState(null)
-  
-  useEffect(() => {
-    // get user info
-    const getUser = async () => {
-      const res = await axios.get(`${BASE_URL}users/id/${userId}`)
-      setUserName(res.data.name)
-      setUserUsername(res.data.username)
-      
-      
-    }
-    
-    getUser()
-    
-  }, [userId])
-  
-  console.log(userName)
+  // const [user, setUser] = useState(null)
+  // const [userUsername, setUserUsername] = useState(null)
   
   
   const userInitialState = {
-    name: userName,
-    username: userUsername,
+    name: '',
+    username: '',
   }
-
+  
   const passwordInitialState = {
     oldPassword: '',
     newPassword: '',
   }
+  // const navigate = useNavigate()
+  let {userId} = useParams()
   const [userFormValues, setUserFormValues] = useState(userInitialState)
   const [passwordFormValues, setPasswordFormValues] = useState(passwordInitialState)
 
-
+  
+    // get user info
+    const getUser = useCallback(async () => {
+      const res = await axios.get(`${BASE_URL}users/id/${userId}`)
+      // setUser(res.data)
+      setUserFormValues(res.data)
+      
+      
+    }, [userId])
+    
+  
+  
+  useEffect(() => {
+    getUser()
+  },[getUser])
+  // console.log(user)
+  
+  
+  const handleRefresh = () => {
+    window.location.reload(false);
+}
 
   const userHandleChange = (e) => {
     setUserFormValues({ ...userFormValues, [e.target.name]: e.target.value })
@@ -52,11 +59,15 @@ const Settings = () => {
     setPasswordFormValues({ ...passwordFormValues, [e.target.name]: e.target.value })
   }
   
-  const updateUser = async (e) => {
-    e.preventDefault()
-    await UpdateUser({userId, ...userFormValues})
-    // navigate('/')
-  }
+  const notify = () => toast.info("User was successfully updated!");
+  
+    const updateUser = async (e) => {
+      e.preventDefault()
+      await UpdateUser({userId, ...userFormValues})
+      // handleRefresh()
+      // setUserFormValues(userInitialState)
+      notify()
+    }
 
   const updatePassword = async (e) => {
     // e.preventDefault()
@@ -67,8 +78,22 @@ const Settings = () => {
     // navigate('/')
   }
 
+
+
   return (
     <div className="text-lg w-full max-w-xs min-h-screen text-white container pt-12 pb-24">
+        <ToastContainer
+            position="top-right"
+            autoClose={4000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+            />
         <h1 className='font-2-bold text-xl md:text-2xl text-center mx-4 pb-10'>Update Your Current Info</h1>
         <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">        
           {/* Username Section */}
@@ -80,7 +105,7 @@ const Settings = () => {
               onChange={userHandleChange}
               name="name"
               type="name"
-              placeholder={`Current Name: ${userName}`}
+              // placeholder={`Current Name: ${user.name}`}
               value={userFormValues.name}
               className="font-1 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               required
@@ -94,7 +119,7 @@ const Settings = () => {
               onChange={userHandleChange}
               name="username"
               type="username"
-              placeholder={`current username: ${userUsername}`}
+              // placeholder={`current username: ${user.username}`}
               value={userFormValues.username}
               className="font-1 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               required
