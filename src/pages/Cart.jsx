@@ -4,7 +4,9 @@ import {useState, useEffect, useCallback} from 'react'
 import { useParams } from 'react-router-dom'
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import {BASE_URL} from '../globals'
-// import { UpdateAmount } from '../services/Auth'
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CLIENT_ID = process.env.REACT_APP_PAYPAL_CLIENT_ID
 
@@ -75,6 +77,19 @@ const Cart = () => {
 
     return cartItems !== null || userInfo !== null ? (
     <div className='min-h-screen text-white py-4 pb-24 sm:py-12'>
+         <ToastContainer
+            position="top-right"
+            autoClose={4000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+            />
+        
         <h1 className='font-2-bold text-lg md:text-2xl text-center py-10 mx-4 sm:mx-32 lg:mx-48'>Hi {userInfo?.name} We are partnered with Kroger to help us get the items to you as fast as possible just confirm your shopping cart list, and proceed to payment</h1>
         <div className='flex flex-col text-center justify-center pt-6'>
             <p className='text-2xl font-1-bold'>Total: &nbsp;${total}</p>
