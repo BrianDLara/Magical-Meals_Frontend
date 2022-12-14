@@ -21,12 +21,6 @@ const Cart = () => {
     const [userInfo, setUserInfo] = useState(null)
     const [total, setTotal] = useState(null)
     
-    const handleRefresh = () => {
-        window.location.reload(false);
-    }
-
-      
-
     useEffect(() => {
         // get all the items from the user cart
         const getItems = async () => {
@@ -60,9 +54,28 @@ const Cart = () => {
         getTotal()
     }, [getTotal])
     
+    
+    // window reload storage
+    const success = () => {
+        toast.success("Grocery Item was successfully deleted!");
+      }
+  
+      window.onload = function() {
+        let reloading = sessionStorage.getItem("reloading");
+        if (reloading) {
+            sessionStorage.removeItem("reloading");
+            success();
+        }
+      }
+      
+      const handleRefresh = () => {
+      sessionStorage.setItem("reloading", "true");
+      document.location.reload();
+      }
+    
     const handleDelete = async (e) => {
         let itemId = e
-        await axios.delete(`${BASE_URL}api/carts/item_id/${itemId}`)
+        await axios.delete(`${BASE_URL}/carts/item_id/${itemId}`)
         handleRefresh()
     }
 
@@ -79,7 +92,7 @@ const Cart = () => {
     <div className='min-h-screen text-white py-4 pb-24 sm:py-12'>
          <ToastContainer
             position="top-right"
-            autoClose={4000}
+            autoClose={2000}
             hideProgressBar={false}
             newestOnTop={false}
             closeOnClick
@@ -123,7 +136,7 @@ const Cart = () => {
                 <div className='cart-data-container' key={item?.id}>
                     <div className='mx-10 flex justify-between items-center'>
                         <h2 className='font-2-bold'>{item?.name}</h2>
-                        <button onClick={() => handleDelete(item.id)} className="font-2-bold focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 rounded-lg text-sm px-3 py-2.5 mr-3 mb-4 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Remove</button>
+                        <button onClick={() => handleDelete(item?.id)} className="font-2-bold focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 rounded-lg text-sm px-3 py-2.5 mr-3 mb-4 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Remove</button>
                     </div>
                     <img className="cart-image mb-2" src={item?.image} alt={item?.name} width='50px'/>
                     {/* <div className='flex items-center justify-center text-lg'>
