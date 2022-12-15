@@ -1,9 +1,9 @@
 import React from 'react'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
+import { Link,useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import {BASE_URL} from '../globals'
-
+import Comments from '../components/Comments'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -15,6 +15,7 @@ const Recipe = () => {
   let {userId, recipeId} = useParams()
   const [recipe, setRecipe] = useState([])
   const [cartId, setCartId] = useState([])
+  const [comments, setComments] = useState([])
 
   useEffect(() => {
     // Get recipe with ingredient list
@@ -28,6 +29,13 @@ const Recipe = () => {
       setCartId(res.data)
     }
 
+    const GetCommentById = async () => {
+      const res = await axios.get(`${BASE_URL}comments/recipe_users/${recipeId}`)
+      setComments(res.data)
+      
+    }
+
+    GetCommentById()
     GetCartById()
     GetRecipesWithItems()
   },[recipeId, userId])
@@ -49,16 +57,14 @@ const Recipe = () => {
     }
   }
   
-
     const notify = () => toast.info("Item added to cart!");
   
- 
+    const toggleCart = async (e) => {
+      let itemId = e
+      await axios.post(`${BASE_URL}carts/add_cart_item/cart_id/${cartId?.id}/item_id/${itemId?.id}`)
+      notify()
+    }
 
-  const toggleCart = async (e) => {
-    let itemId = e
-    await axios.post(`${BASE_URL}carts/add_cart_item/cart_id/${cartId?.id}/item_id/${itemId?.id}`)
-    notify()
-  }
 
   return(
     <div className='min-h-screen container mx-auto text-white' key={recipe?.id}>
@@ -122,6 +128,21 @@ const Recipe = () => {
             </div>
           ))}
         </div>
+      </section>
+      <section className="py-10 px-6 xl:px-56 text-2xl mb-2">
+      <h2 className="underline text-center font-2-bold mb-4 text-blue-500 text-3xl pb-10">Comments</h2>
+      <Link type="button" to={`/new_review/user/${userId}/recipe/${recipeId}`} className="flex justify-center">
+        <button className='font-2-bold text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 rounded-lg  px-5 py-2 text-center mr-2 mb-14'>Share Your Thoughts</button>
+      </Link> 
+        {comments.map((comment) => (
+          <Comments
+            key={comment.id}
+            id={comment.id}
+            userId={userId}
+            recipeId={recipeId}
+            comment={comment.comment}
+          />
+        ))}
       </section>
     </div>
   )}

@@ -19,7 +19,7 @@ const Cart = () => {
 
     const [cartItems, setCartItems] = useState([])
     const [userInfo, setUserInfo] = useState(null)
-    const [total, setTotal] = useState(null)
+    const [total, setTotal] = useState(0)
     
     useEffect(() => {
         // get all the items from the user cart
@@ -49,13 +49,14 @@ const Cart = () => {
             setTotal(sum.toFixed(2)) 
         })
     }, [cartItems])
+
+    console.log(total)
+    
     
     useEffect(() => {
         getTotal()
     }, [getTotal])
     
-    console.log(total)
-    let finalPrice = total
     // window reload storage
     const success = () => {
         toast.success("Grocery Item was successfully deleted!");
@@ -115,7 +116,7 @@ const Cart = () => {
                                 purchase_units: [
                                     {
                                         amount: {
-                                            value: `${finalPrice}`
+                                            value: `${total}`
                                         },
                                     },
                                 ],

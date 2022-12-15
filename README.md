@@ -11,7 +11,7 @@
 ####
 
 **Website Link:**
-[Heroku]()
+[Link]()
 
 ---
 
@@ -25,11 +25,11 @@
 
 #### ERD
 
-![image](https://i.imgur.com/Wp9e5yg.jpg)
+![image](https://i.imgur.com/ZnQjl5V.png)
 
 #### Component Hierarchy Diagram
 
-![image](https://i.imgur.com/jT1KYRt.jpg)
+![image](https://i.imgur.com/LNS9ppD.png)
 
 ---
 
@@ -72,23 +72,28 @@
 
 > #### **Home Page**
 
-![image]()
+![image](https://i.imgur.com/6DxRMNm.png)
 
 > #### **Recipe**
 
-![image]()
+![image](https://i.imgur.com/3aeXYJr.png)
 
 > #### **Shopping Cart**
 
-![image]()
+![image](https://i.imgur.com/J8KBges.png)
 
 ### **_Task Lists_** :clipboard:
 
-- [ ] Add a shopping cart page
-
-- [] Make a Landing page
-- [] Make a recipe Page
+- [ ] Integrate Kroger API
+- [ ] Add more recipes
+- [x] Add a comment model
 
 ---
 
 ### **_Credits_**
+
+**Kroger**
+[item images](https://www.kroger.com)
+
+**Recipes**
+[Disney Cookbook By "Madison Wilson"](https://www.goodreads.com/book/show/56333336-disney-cookbook)
