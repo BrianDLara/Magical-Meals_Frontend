@@ -4,7 +4,7 @@ const FooterNav = ({authenticated, user}) => {
     let authenticatedOptions
     if (user) {
       authenticatedOptions = (
-        <ul className="flex flex-wrap items-center mb-6 text-sm text-gray-500 sm:mb-0 dark:text-gray-400">
+        <ul className="flex flex-wrap items-center mb-2 text-sm text-gray-500 sm:mb-0 dark:text-gray-400">
             <li>
                 <a href="/about" className="mr-4 hover:underline md:mr-6 ">About</a>
             </li>
@@ -33,7 +33,7 @@ const FooterNav = ({authenticated, user}) => {
     )
   return (
   <div>
-    <footer className="p-4 bg-white shadow md:px-6 md:py-8 dark:bg-gray-900">
+    <footer className="p-4 bg-white shadow md:px-6 md:py-4 dark:bg-gray-900">
     <div className="sm:flex sm:items-center sm:justify-between">
     <a href="/" className="flex items-center mb-4 sm:mb-0">
                 <img src="https://i.imgur.com/1ZSRrmo.png" className="h-6 mr-5 sm:h-9" alt="Magical Recipes logo" />
@@ -42,7 +42,7 @@ const FooterNav = ({authenticated, user}) => {
         {authenticated && user ? authenticatedOptions : publicOptions}
 
     </div>
-    <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+    <hr className="mt-2 mb-4 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
     <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2022 <a href="/" className="hover:underline">Magical Meals™</a>. All Rights Reserved.
     </span>
 </footer>

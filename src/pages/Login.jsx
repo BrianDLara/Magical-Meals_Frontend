@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { SignInUser } from '../services/Auth'
+// import { redirectToLogin } from '../services/Auth'
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -30,6 +31,20 @@ const Login = ({ toggleAuthenticated, setUser }) => {
     toggleAuthenticated(true)
     navigate('/')
   }
+
+  // const krogerLogin = async (e) => {
+  //   e.preventDefault()
+  //   const payload = await redirectToLogin().catch(
+  //     function (error) {
+  //       notifyUser()
+  //       return Promise.reject(error)
+  //     }
+  //   )
+  //   setUser(payload)
+  //   toggleAuthenticated(true)
+  //   // navigate('/')
+  // }
+
   return (
     <div className="text-lg w-full max-w-xs min-h-screen text-white container pt-24">
         <ToastContainer
@@ -74,19 +89,29 @@ const Login = ({ toggleAuthenticated, setUser }) => {
             />
           </section>
           
-          {/* Login Button */}
-          <button
-            disabled={!formValues.username || !formValues.password}
-            className="register-button hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          >
-            Login
-          </button>
+          <div className='flex flex-col'>
+            {/* Login Button */}
+            <button
+              disabled={!formValues.username || !formValues.password}
+              className="register-button disabled:transform-none disabled:bg-gray disabled:transition-none disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold mb-8 py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+              Login
+            </button>
+
+            {/* Login with kroger Button */}
+            {/* <button
+              className="register-button text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              onClick={krogerLogin}
+            >
+              Login with kroger
+            </button> */}
+          </div>
 
           {/* Register message & Link */}
           <span className='block text-gray-700 text-sm font-bold mb-2 mt-12 text-center'>
             <h3 className='text-lg font-2'>Haven't made an account? &nbsp;</h3>
             <Link to="/register">
-              <h3 className='text-xl font-2-bold text-green-700 mt-2'>Register Here</h3>
+              <h3 className='text-xl font-2-bold text-green-700 hover:text-green-900 mt-2'>Register Here</h3>
             </Link>
           </span>
         </form>
