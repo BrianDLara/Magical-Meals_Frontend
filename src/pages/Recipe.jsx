@@ -32,7 +32,6 @@ const Recipe = () => {
     const GetCommentById = async () => {
       const res = await axios.get(`${BASE_URL}comments/recipe_users/${recipeId}`)
       setComments(res.data)
-      
     }
 
     GetCommentById()
@@ -138,7 +137,7 @@ const Recipe = () => {
           <Comments
             key={comment.id}
             id={comment.id}
-            userId={userId}
+            userIdx={comment.userId}
             recipeId={recipeId}
             comment={comment.comment}
           />
