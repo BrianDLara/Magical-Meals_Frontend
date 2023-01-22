@@ -58,6 +58,10 @@ html {
   background-color: #30638e;
 }
 
+.register-button:hover {
+  background-color: #244c6c;
+}
+
 
 /* Home Page */
 .home-container{
