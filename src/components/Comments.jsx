@@ -2,7 +2,6 @@ import React from 'react'
 import axios from 'axios'
 import {BASE_URL} from '../globals'
 import { Link, useParams } from 'react-router-dom'
-import { useState } from 'react'
 const Comments = ({comment, userIdx}) => {
   let {userId, recipeId } = useParams() 
     

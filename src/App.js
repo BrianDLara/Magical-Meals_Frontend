@@ -70,6 +70,7 @@ function App() {
             path="/user_id/:userId/recipe/:recipeId"
             element={<Recipe user={user} />}
           />
+          <Route path="/recipe/:recipeId" element={<Recipe user={user} />} />
           <Route path="favorite/:userId" element={<Favorite />} />
           <Route path="cart/:userId" element={<Cart user={user} />} />
           <Route path="/about" element={<About />} />

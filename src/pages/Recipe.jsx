@@ -78,8 +78,8 @@ const Recipe = () => {
         </div>
         <div className='flex justify-center items-start relative px-6 sm:pt-4 mb-6 xl:mt-40 xl:mb-28'>
           <p className='font-2-bold text-xl'>Share:&nbsp;&nbsp;</p>
-          <a  href={`https://twitter.com/share?url=http://localhost:3000/recipe/${recipe?.id}&text=${recipe?.name}`} className='twitter-icon mx-2 text-2xl'><FontAwesomeIcon icon={faTwitter}/></a>
-          <a href={`https://www.facebook.com/sharer.php?u=http://localhost:3000/recipe/${recipe?.id}`} className='facebook-icon mx-2 text-2xl'><FontAwesomeIcon icon={faFacebook}/></a>
+          <a  href={`https://twitter.com/share?url=https://magical-meals.herokuapp.com/recipe/${recipe?.id}&text=${recipe?.name}`} className='twitter-icon mx-2 text-2xl'><FontAwesomeIcon icon={faTwitter}/></a>
+          <a href={`https://www.facebook.com/sharer.php?u=https://magical-meals.herokuapp.com/recipe/${recipe?.id}`} className='facebook-icon mx-2 text-2xl'><FontAwesomeIcon icon={faFacebook}/></a>
           <button onClick={toggleFavorite} className='font-2-bold favorite-icon text-xl text-black ml-8' id='addedFav'>Add To Favorites</button>
         </div>
       </section>

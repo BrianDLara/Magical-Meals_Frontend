@@ -14,7 +14,7 @@ const EditReview = () => {
     const initialState = {
         comment: '',
         userId: userId,
-        recipeIdd: recipeId
+        recipeId: recipeId
     }
 
   const [formValues, setFormValues] = useState(initialState)
@@ -66,12 +66,12 @@ console.log(comment)
             
             <textarea
                 onChange={handleChange}
+                value={formValues.comment}
                 name="comment"
                 type="text"
                 cols="80"
                 rows="8"
                 placeholder="Write Here"
-                value={formValues.comment}
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 required
             />
