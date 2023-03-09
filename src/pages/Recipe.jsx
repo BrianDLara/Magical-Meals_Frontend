@@ -13,6 +13,7 @@ const Recipe = () => {
 
 
   let {userId, recipeId} = useParams()
+  const userIdx = parseInt(userId, 10)
   const [recipe, setRecipe] = useState([])
   const [cartId, setCartId] = useState([])
   const [comments, setComments] = useState([])
@@ -63,6 +64,7 @@ const Recipe = () => {
       await axios.post(`${BASE_URL}carts/add_cart_item/cart_id/${cartId?.id}/item_id/${itemId?.id}`)
       notify()
     }
+
 
 
   return(
@@ -134,10 +136,11 @@ const Recipe = () => {
         <button className='font-2-bold text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 rounded-lg  px-5 py-2 text-center mr-2 mb-14'>Share Your Thoughts</button>
       </Link> 
         {comments.map((comment) => (
+          
           <Comments
+            isUserComment = {comment?.userId === userIdx}
             key={comment.id}
             id={comment.id}
-            userIdx={comment.userId}
             recipeId={recipeId}
             comment={comment.comment}
           />
